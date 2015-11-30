@@ -385,8 +385,8 @@ function processHash() {
     if (hash.substring(0, 9) == 'articles/') {
         //console.log('next substring '+hash.substring(9));
         $('#'+hash.substring(9)+'_article').show();
-        document.title = $('#'+hash.substring(9)+'_article h2').text();
-        gaTrack(window.location.hash.substring(2), document.title);
+        document.title = $('#'+hash.substring(9)+'_article h2').text() + ' | Inside Your Government';
+        gaTrack(window.location.hash.substring(2), document.title + ' | Inside Your Government');
         DISQUS.reset({
           reload: true,
           config: function () {  
