@@ -247,7 +247,7 @@ function addData(table, element, data) {
   }
   header += '<h3>Rankings</h3>';
   $.each(data['group_counts'], function(j, value2) {
-      header += '<table><tr><th colspan="2">'+value2[0]+'</th></tr>';
+      header += '<table class="data-table"><tr><th colspan="2">'+value2[0]+'</th></tr>';
       $.each(value2[1], function(h, value3) {
           header += '<tr><td>'+JSON.stringify(value3[0])+'</td><td>'+value3[1]+'</td></tr>';
       });
