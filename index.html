@@ -167,9 +167,13 @@ background:yellow;
 <script src="https://code.jquery.com/jquery-git2.min.js"></script>
 <script>
   function highlight(what, where) {
+    try {  
     where.each(function() {
       $(this).html($(this).html().replace(what.not('photo'), '<span class="highlight">'+what+'</span>'));
     });
+    } catch (err) {
+        
+    }
   }
 function clone(obj) {
     if (null == obj || "object" != typeof obj) return obj;
