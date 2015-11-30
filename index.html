@@ -282,7 +282,7 @@ function addData(table, element, data) {
         });
         table_html += '</table>';
         table_html += '</td>';
-      } else if (String(value2[value3]) == '[object Object]') {
+      } else if (String(value2[value3]).indexOf('[object Object]') > -1) {
         table_html += '<td>'+JSON.stringify(value2[value3]).replace(/:"/g, ': "')+'</td>'; 
       } else if (value3 in value2) {
         table_html += '<td>'+value2[value3]+'</td>';
