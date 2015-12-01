@@ -318,7 +318,7 @@ function addData(table, element, data) {
   });
   
   //table_html += '</table>';
-  $('.data_results').html(table_html);
+  setTimeout(function() {$('.data_results').html(table_html);}, 1000);
 }
 function addUrl(element, url) {
   window.location.hash = '!/data/'+url.substring(45);
