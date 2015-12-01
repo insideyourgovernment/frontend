@@ -186,6 +186,9 @@ function clone(obj) {
 function stringStartsWith (string, prefix) {
   return string.slice(0, prefix.length) == prefix;
 }
+function appendLater(what, when) {
+  setTimeout(function() {$('.data_results').append(what)}, when);   
+}
 function addData(table, element, data) {
   window.payload = data['payload'];
   //console.log('fields '+data['fields']);
@@ -308,6 +311,7 @@ function addData(table, element, data) {
       } 
     });
     table_html += '</tr>';
+    appendLater(table_html, j*100)
     //$('.data_results').append(table_html);
   });
   
