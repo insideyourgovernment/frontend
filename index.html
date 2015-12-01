@@ -190,6 +190,7 @@ function appendLater(what, when) {
   setTimeout(function() {$('.data_results').append(what)}, when);   
 }
 function addData(table, element, data) {
+  element.html('');
   window.payload = data['payload'];
   //console.log('fields '+data['fields']);
   var additional = '';
