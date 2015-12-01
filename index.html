@@ -241,7 +241,7 @@ function addData(table, element, data) {
     } else if (value['selector'] == 'dropdown') {
         header += ' <strong>'+value['display_name']+'</strong> <select data-field="'+value['name']+'" class="dropdown_selector">';
         
-        selected = 'none'
+        selected = 'none';
         if ('filter' in window.payload) {
           if (value['name'] in window.payload['filter']) {
             selected = window.payload[value['name']];
@@ -629,6 +629,26 @@ $(function() {
     getDataForPayload(window.payload, $('#working_space'));
     
   });
+  $('body').on('change', '.dropdown_selector', function(e) {
+    var f = $(this).attr('data-field');
+    window.payload['filter'] = {};
+    //console.log(JSON.stringify(window.payload));
+    if ($(this).val() == 'none') {
+      if ('filter' in window.payload) {
+        if ($(this).attr('data-field') in window.payload['filter']) {
+          delete window.payload['filter'][$(this).attr('data-field')];
+        }
+        //if (Object.keys(window.payload['filter'])) {
+        //  delete window.payload['filter'];
+        //}
+      }      
+    } else {
+      //console.log($(this).val(), Boolean($(this).val()));
+      window.payload['filter'][f] = $(this).val();
+    }
+    getDataForPayload(window.payload, $('#working_space'));
+    
+  });  
 });
 </script>
 </head>
