@@ -241,7 +241,7 @@ function addData(table, element, data) {
     } else if (value['selector'] == 'dropdown') {
         header += ' <strong>'+value['display_name']+'</strong> <select data-field="'+value['name']+'" class="dropdown_selector">';
         
-        selected = ''
+        selected = 'none'
         if ('filter' in window.payload) {
           if (value['name'] in window.payload['filter']) {
             selected = window.payload[value['name']];
@@ -255,7 +255,14 @@ function addData(table, element, data) {
             }
             header += '<option value="'+item+'"'+selected_html+'>'+item+'</option>';
         });
-        header += '<option value="none"></option>';
+        if (selected == 'none') {
+            if (item == selected) {
+              selected_html = ' selected';
+            } else {
+              slected_html = '';   
+            }
+        }
+        header += '<option value="none"'+selected_html+'></option>';
         header += '</select>';
     }
   });
