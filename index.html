@@ -256,7 +256,7 @@ function addData(table, element, data) {
             header += '<option value="'+item+'"'+selected_html+'>'+item+'</option>';
         });
         if (selected == 'none') {
-            if (item == selected) {
+            if ('none' == selected) {
               selected_html = ' selected';
             } else {
               selected_html = '';   
