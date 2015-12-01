@@ -196,8 +196,9 @@ function addData(table, element, data) {
   }
   var title = data['table']['name']+additional;
   var header = '<h2>'+title+'</h2>';
+  element.append(header);
   document.title = title + " | Inside Your Government";
-  header += '<a href="#!/data/?table='+data['table']['id']+'">Link to table without any subqueries</a> ';
+  header = '<a href="#!/data/?table='+data['table']['id']+'">Link to table without any subqueries</a> ';
   header += 'Raw data in JSON format at <span class="url"></span>';
   header += '<br/><strong>Search:</strong> <input type="text" class="search_query" /><input type="button" data-table="'+data['table']['id']+'" class="go" value="go" />';
   if (data['number_of_rows'] == 1) {
@@ -205,6 +206,8 @@ function addData(table, element, data) {
   } else {
     header += ' ('+data['number_of_rows']+' '+data['name_for_rows']+')';
   }
+  element.append(header);
+  header = ''
   $.each(data['field_selectors'], function(i, value) {
     var isboth = '';
     var istrue = '';  
@@ -303,7 +306,7 @@ function addData(table, element, data) {
     table_html += '</tr>';
   });
   table_html += '</table>';
-  element.html(header+table_html);
+  //element.html(header+table_html);
 }
 function addUrl(element, url) {
   window.location.hash = '!/data/'+url.substring(45);
