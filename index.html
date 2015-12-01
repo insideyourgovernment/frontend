@@ -196,7 +196,8 @@ function addData(table, element, data) {
   }
   var title = data['table']['name']+additional;
   var header = '<h2>'+title+'</h2>';
-  //element.append(header);
+  element.append(header);
+  header = '';
   document.title = title + " | Inside Your Government";
   header = '<a href="#!/data/?table='+data['table']['id']+'">Link to table without any subqueries</a> ';
   header += 'Raw data in JSON format at <span class="url"></span>';
@@ -207,7 +208,7 @@ function addData(table, element, data) {
     header += ' ('+data['number_of_rows']+' '+data['name_for_rows']+')';
   }
   element.append(header);
-  //header = ''
+  header = '';
   $.each(data['field_selectors'], function(i, value) {
     var isboth = '';
     var istrue = '';  
@@ -248,6 +249,8 @@ function addData(table, element, data) {
       header += '</table>';
     }
   }
+  element.append(header);
+  header = '';
   header += '<h3>Rankings</h3>';
   $.each(data['group_counts'], function(j, value2) {
       header += '<table class="data_table"><tr><th colspan="2">'+value2[0]+'</th></tr>';
@@ -257,12 +260,13 @@ function addData(table, element, data) {
       header += '</table>';
   });
   header += '<h3>The data</h3>';
-    
-  var table_html = '<table class="data_table data_results">';
-  
+  element.append(header);
+  //header = '';
+  var table_html = '<table class="data_table data_results"></table>';
+  $('.data_results').append(table_html);
   
   $.each(data['data'], function(j, value2) {
-    table_html += '<tr>';
+    table_html = '<tr>';
     
     if ('default_fields_to_display' in data['table']) {
       var fields = data['table']['default_fields_to_display'];
@@ -304,9 +308,11 @@ function addData(table, element, data) {
       } 
     });
     table_html += '</tr>';
+    $('.data_results').append(table_html);
   });
-  table_html += '</table>';
-  element.html(header+table_html);
+  
+  //table_html += '</table>';
+  //element.html(header+table_html);
 }
 function addUrl(element, url) {
   window.location.hash = '!/data/'+url.substring(45);
