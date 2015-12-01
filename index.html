@@ -240,7 +240,9 @@ function addData(table, element, data) {
         header += ' <select data-field="'+value['name']+'" class="boolean_field"><option value="both"'+isboth+'>Both '+value['display_name']+' and Not '+value['display_name']+'</option><option value="true"'+istrue+'>Only '+value['display_name']+'</option><option value="false"'+isfalse+'>Only Not '+value['display_name']+'</option></select>';
     } else if (value['selector'] == 'dropdown') {
         header += ' <strong>'+value['display_name']+'</strong> <select data-field="'+value['name']+'" class="dropdown_selector">';
-        
+        $.each(value['items'], function(items_i, item) {
+           header += '<option value="'+item+'">'+item+'</option>';
+        });
         header += '</select>';
     }
   });
