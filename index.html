@@ -268,9 +268,9 @@ function addData(table, element, data) {
   //header = '';
   var table_html = '<table class="data_table data_results"></table>';
   element.append(table_html);
-  
+  table_html = ''
   $.each(data['data'], function(j, value2) {
-    table_html = '<tr>';
+    table_html += '<tr>';
     
     if ('default_fields_to_display' in data['table']) {
       var fields = data['table']['default_fields_to_display'];
@@ -313,12 +313,12 @@ function addData(table, element, data) {
     });
     table_html += '</tr>';
     //appendLater(table_html, j*5)
-    $('.data_results').append(table_html);
-    console.log(table_html);
+    //$('.data_results').append(table_html);
+    //console.log(table_html);
   });
   
   //table_html += '</table>';
-  //element.html(header+table_html);
+  $('.data_results').html(table_html);
 }
 function addUrl(element, url) {
   window.location.hash = '!/data/'+url.substring(45);
