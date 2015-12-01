@@ -263,7 +263,7 @@ function addData(table, element, data) {
   element.append(header);
   //header = '';
   var table_html = '<table class="data_table data_results"></table>';
-  $('.data_results').append(table_html);
+  element.append(table_html);
   
   $.each(data['data'], function(j, value2) {
     table_html = '<tr>';
