@@ -297,20 +297,27 @@ function addData(table, element, data, page) {
   var number_of_records = data['data'].length;
     var per_page = 10
     var pages = Math.floor(number_of_records / per_page);
-    if (number_of_records % per_page != 0) {
-        pages += 1;
-    }
-    for (var i=1;i<pages+1;i++) {
-        $('.pages').append('<a href="#" class="to_page_'+i+'">'+i+'</a>');
-        //console.log(i+' '+pages);
-        if (i != pages) {
-          $('.pages').append(' | ');
+    if (pages > 1) {
+        if (number_of_records % per_page != 0) {
+            pages += 1;
+        }
+        for (var i=1;i<pages+1;i++) {
+            $('.pages').append('<a href="#" class="to_page_'+i+'">'+i+'</a>');
+            //console.log(i+' '+pages);
+            if (i != pages) {
+              $('.pages').append(' | ');
+            }
         }
     }
   var table_html = '<table class="data_table data_results"></table>';
   element.append(table_html);
-  table_html = ''
-  $.each(data['data'], function(j, value2) {
+  table_html = '';
+  if (page * per_page < number_of_records) {
+      var rows = data['data'].slice((page-1) * per_page,page * per_page);
+  } else {
+      var rows = data['data'].slice((page-1) * per_page);
+  }
+  $.each(rows, function(j, value2) {
     table_html += '<tr>';
     
     if ('default_fields_to_display' in data['table']) {
