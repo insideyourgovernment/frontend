@@ -302,7 +302,7 @@ function addData(table, element, data, page) {
             pages += 1;
         }
         for (var i=1;i<pages+1;i++) {
-            $('.pages').append('<a href="#" class="to_page_'+i+'">'+i+'</a>');
+            $('.pages').append('<a href="" class="to_page_'+i+'">'+i+'</a>');
             //console.log(i+' '+pages);
             if (i != pages) {
               $('.pages').append(' | ');
@@ -374,6 +374,7 @@ function addUrl(element, url) {
   setTimeout(function() {element.find('.url').html('<a href="'+url+'">'+url+'</a>');}, 500);
 }
 function getData(table, element, other) {
+  element.text('Loading the data');
   var params = {'table': table};
   if (other) {
     var params = other;
@@ -394,6 +395,7 @@ function getData(table, element, other) {
   });
 }
 function getDataForPayload(payload, element) {
+    element.text('Loading the data');
   //console.log('type '+String(payload) == '[object Object]');
   if (String(payload) == '[object Object]') {
     $.ajax({
@@ -406,7 +408,8 @@ function getDataForPayload(payload, element) {
         },
         success: function(data){
           var table = data['table'];
-          addData(table, element, data);
+          window.data = data;
+          addData(table, element, data, 1);
           if ('payload' in data) {
             if ('has_string_in_any_field' in data['payload']) {
               setTimeout(function() {$('.search_query').val(data['payload']['has_string_in_any_field'])}, 1000);
@@ -416,6 +419,7 @@ function getDataForPayload(payload, element) {
     });
     
   } else {
+    
     $.ajax({
         url: 'https://api.insideyourgovernment.com/retrive/?payload='+payload,
         
@@ -425,8 +429,9 @@ function getDataForPayload(payload, element) {
             addUrl(element, this.url);
         },
         success: function(data){
+          window.data = data;
           var table = data['table'];
-          addData(table, element, data);
+          addData(table, element, data, 1);
           if ('payload' in data) {
             if ('has_string_in_any_field' in data['payload']) {
               setTimeout(function() {$('.search_query').val(data['payload']['has_string_in_any_field'])}, 500);
@@ -669,7 +674,14 @@ $(function() {
     }
     getDataForPayload(window.payload, $('#working_space'));
     
-  });  
+  }); 
+   $('body').on('click', '.pages a', function(e) {
+        e.preventDefault();
+        $('.pages a').removeClass('current');
+        $('.to_page_'+$(this).text()).addClass('current');
+       
+        addData(window.data['table']['id'], $('#working_space'), window.data, $(this).text());
+   });
 });
 </script>
 </head>
