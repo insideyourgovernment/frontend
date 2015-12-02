@@ -189,7 +189,7 @@ function stringStartsWith (string, prefix) {
 function appendLater(what, when) {
   setTimeout(function() {$('.data_results').append(what)}, when);   
 }
-function addData(table, element, data) {
+function addData(table, element, data, page) {
   element.html('');
   window.payload = data['payload'];
   //console.log('fields '+data['fields']);
@@ -291,8 +291,22 @@ function addData(table, element, data) {
       header += '</table>';
   });
   header += '<h3>The data</h3>';
+  header += '<div class="pages"></div>';
   element.append(header);
   //header = '';
+  var number_of_records = data['data'].length;
+    var per_page = 10
+    var pages = Math.floor(number_of_records / per_page);
+    if (number_of_records % per_page != 0) {
+        pages += 1;
+    }
+    for (var i=1;i<pages+1;i++) {
+        $('.pages').append('<a href="#" class="to_page_'+i+'">'+i+'</a>');
+        //console.log(i+' '+pages);
+        if (i != pages) {
+          $('.pages').append(' | ');
+        }
+    }
   var table_html = '<table class="data_table data_results"></table>';
   element.append(table_html);
   table_html = ''
@@ -367,8 +381,8 @@ function getData(table, element, other) {
           addUrl(element, this.url);
       },
       success: function(data){
-        
-        addData(table, element, data);
+        window.data = data;
+        addData(table, element, window.data, 1);
       }
   });
 }
