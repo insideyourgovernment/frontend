@@ -266,6 +266,18 @@ function addData(table, element, data, page) {
         header += '</select>';
     }
   });
+  header += '<strong>Sorting:</strong> ';
+  header += '<strong>Field:</strong> ';
+  header += '<select>';
+  $.each(data['fields'], function(i, value) {
+    header += '<option value="'+value+'">'+value+'</option>';
+  });
+  header += '</select>';
+  header += '<strong>Direction:</strong> ';
+  header += '<select>';
+  header += '<option value="desc" selected>descending</option>';
+  header += '<option value="asc">ascending</option>';   
+  header += '</select>';
   if ('percentages' in data) {
     if (data['percentages'].length > 0) {
       header += '<h3>Auto generated analysis</h3>';
@@ -335,7 +347,7 @@ function addData(table, element, data, page) {
         table_html += '<td></td>';
       } else if (value3.indexOf("photo") > -1) {
         table_html += '<td class="photo"><img src="'+value2[value3]+'" style="max-width:100px" /></td>';
-      } else if (value3 == 'link') {
+      } else if (value3.indexOf('link') > -1) {
         table_html += '<td><a href="'+value2[value3]+'">'+value2[value3]+'</a></td>';
       } else if (value3 == 'Summarized results') {
         var sresults = value2[value3];
