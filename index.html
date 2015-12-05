@@ -266,15 +266,16 @@ function addData(table, element, data, page) {
         header += '</select>';
     }
   });
-  header += '<strong>Sorting:</strong> ';
-  header += '<strong>Field:</strong> ';
-  header += '<select>';
+  header += '<br/><strong>Sorting:</strong> ';
+  header += ' <strong>Field:</strong> ';
+  header += '<select class="field_for_sorting">';
+  header += '<option value="" selected></option>';
   $.each(data['fields'], function(i, value) {
     header += '<option value="'+value+'">'+value+'</option>';
   });
   header += '</select>';
-  header += '<strong>Direction:</strong> ';
-  header += '<select>';
+  header += ' <strong>Direction:</strong> ';
+  header += '<select class="direction_for_sorting">';
   header += '<option value="desc" selected>descending</option>';
   header += '<option value="asc">ascending</option>';   
   header += '</select>';
@@ -630,7 +631,8 @@ $(function() {
     var params = theObj.getAttributes();
     
     $.get('https://api.insideyourgovernment.com/retrive/', {'payload': JSON.stringify(params)}, function(data) {
-      //console.log(data);
+      console.log(data);
+        
       addDivsOfTables(theObj, data);
     });
   }
