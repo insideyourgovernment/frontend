@@ -629,7 +629,7 @@ $(function() {
   }
   function getDivsOfTables(theObj) {
     var params = theObj.getAttributes();
-    
+    console.log('https://api.insideyourgovernment.com/retrive/?payload='+urlencode(JSON.stringify(params)))
     $.get('https://api.insideyourgovernment.com/retrive/', {'payload': JSON.stringify(params)}, function(data) {
       console.log(data);
         
