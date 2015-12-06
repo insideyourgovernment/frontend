@@ -338,7 +338,7 @@ function addData(table, element, data, page) {
         table_html += '<td><ul>';
         $.each(value2[value3], function(linki, link) {
           table_html += '<li><a href="'+link['url']+'">'+link['name']+'</a></li>';
-        }
+        });
         table_html += '</ul></td>';
       } else if (value3.indexOf('link') > -1) {
         table_html += '<td><a href="'+value2[value3]+'">'+value2[value3]+'</a></td>';
