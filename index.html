@@ -307,22 +307,8 @@ function addData(table, element, data, page) {
   header += '<div class="pages"></div>';
   element.append(header);
   //header = '';
-  var number_of_records = data['data'].length;
-    var per_page = 10
-    var pages = Math.floor(number_of_records / per_page);
-    if (pages > 1) {
-        if (number_of_records % per_page != 0) {
-            pages += 1;
-        }
-        for (var i=1;i<pages+1;i++) {
-            $('.pages').append('<a href="" class="to_page_'+i+'">'+i+'</a>');
-            //console.log(i+' '+pages);
-            if (i != pages) {
-              $('.pages').append(' | ');
-            }
-        }
-    }
-  var table_html = '<table class="data_table data_results"></table>';
+  
+  var table_html = '<table class="data_table data_results"></table><div class="pages"></div>';
   element.append(table_html);
   table_html = '';
   if (page * per_page < number_of_records) {
@@ -382,6 +368,21 @@ function addData(table, element, data, page) {
   
   //table_html += '</table>';
   setTimeout(function() {$('.data_results').html(table_html);}, 1000);
+    var number_of_records = data['data'].length;
+    var per_page = 10
+    var pages = Math.floor(number_of_records / per_page);
+    if (pages > 1) {
+        if (number_of_records % per_page != 0) {
+            pages += 1;
+        }
+        for (var i=1;i<pages+1;i++) {
+            $('.pages').append('<a href="" class="to_page_'+i+'">'+i+'</a>');
+            //console.log(i+' '+pages);
+            if (i != pages) {
+              $('.pages').append(' | ');
+            }
+        }
+    }
 }
 function addUrl(element, url) {
   window.location.hash = '!/data/'+url.substring(45);
