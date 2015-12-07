@@ -703,8 +703,9 @@ $(function() {
         e.preventDefault();
         $('.pages a').removeClass('current');
         $('.to_page_'+$(this).text()).addClass('current');
-       
-        addData(window.data['table']['id'], $('#working_space'), window.data, $(this).text());
+        window['page'] = parseInt($(this).text());
+        getDataForPayload(window.data, $('#working_space'));
+        //addData(window.data['table']['id'], $('#working_space'), window.data, $(this).text());
    });
 });
 </script>
