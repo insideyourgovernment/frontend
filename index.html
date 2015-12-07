@@ -192,6 +192,7 @@ function appendLater(what, when) {
 function addData(table, element, data, page) {
   element.html('');
   window.payload = data['payload'];
+  console.log(window.payload);  
   //console.log('fields '+data['fields']);
   var additional = '';
   if ('has_string_in_any_field' in window.payload) {
