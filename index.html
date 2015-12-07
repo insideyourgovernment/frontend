@@ -375,7 +375,7 @@ function addData(table, element, data, page) {
   
   //table_html += '</table>';
   setTimeout(function() {$('.data_results').html(table_html);}, 1000);
-    var number_of_records = data['data'].length;
+    var number_of_records = data['number_of_rows'];
     var per_page = 10
     var pages = Math.floor(number_of_records / per_page);
     if (pages > 1) {
