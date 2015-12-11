@@ -203,7 +203,7 @@ if (!(value3 in value2)) {
         });
         table_html += '</table>';
         table_html += '</td>';
-      } else if (String(value2[value3]).indexOf('[object Object]') > -1) {
+      } else if (String(value2[value3]).indexOf('[object Object]') > -1 || Array.isArray(value2[value3])) {
         table_html += '<td>'+JSON.stringify(value2[value3]).replace(/:"/g, ': "').replace(/,/g, ', ')+'</td>'; 
       } else if (value3 in value2) {
         table_html += '<td>'+value2[value3]+'</td>';
