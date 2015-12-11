@@ -166,6 +166,9 @@ background:yellow;
 </style>
 <script src="https://code.jquery.com/jquery-git2.min.js"></script>
 <script>
+    if(typeof console === "undefined"){
+    console = { log: function() { } };
+  }
   function highlight(what, where) {
     try {  
     where.each(function() {
@@ -192,7 +195,7 @@ function appendLater(what, when) {
 function addData(table, element, data, page) {
   element.html('');
   window.payload = data['payload'];
-  console.log(window.payload);  
+  //console.log(window.payload);  
   //console.log('fields '+data['fields']);
   var additional = '';
   if ('has_string_in_any_field' in window.payload) {
@@ -631,7 +634,11 @@ $(function() {
         table += '<tr>';
         table += '<td><a href="/#!/data/?table='+value2[theObj.attr('data-field_for_url')]+'">'+value2[theObj.attr('data-field_to_name_link')]+'</a>';
         $.each(data['table_fields'], function(h, value3) {
-          table += '<td>'+value2[value3]+'</td>';
+          if (Array.isArray(value2[value3])) {
+            table += '<td>'+String(value2[value3]).replace(/,/g, ', ')+'</td>';  
+          } else {
+            table += '<td>'+value2[value3]+'</td>';
+          }
         });
         table += '</tr>';
       });
@@ -642,9 +649,9 @@ $(function() {
   }
   function getDivsOfTables(theObj) {
     var params = theObj.getAttributes();
-    console.log('https://api.insideyourgovernment.com/retrive/?payload='+encodeURIComponent(JSON.stringify(params)))
+    //console.log('https://api.insideyourgovernment.com/retrive/?payload='+encodeURIComponent(JSON.stringify(params)))
     $.get('https://api.insideyourgovernment.com/retrive/', {'payload': JSON.stringify(params)}, function(data) {
-      console.log(data);
+      //console.log(data);
         
       addDivsOfTables(theObj, data);
     });
