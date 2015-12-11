@@ -175,8 +175,6 @@ if (!(value3 in value2)) {
         table_html += '<td></td>';
       } else if (value3.indexOf("photo") > -1) {
         table_html += '<td class="photo"><img src="'+value2[value3]+'" style="max-width:100px" /></td>';
-      } else if (Array.isArray(value2[value3])) {
-        table_html += '<td>'+String(value2[value3]).replace(/,/g, ', ')+'</td>';  
       } else if (value2[value3] === parseInt(value2[value3], 10)) {
         table_html += '<td>'+numberWithCommas(value2[value3])+'</td>';
       } else if (value3 == 'links') {
@@ -206,7 +204,7 @@ if (!(value3 in value2)) {
         table_html += '</table>';
         table_html += '</td>';
       } else if (String(value2[value3]).indexOf('[object Object]') > -1) {
-        table_html += '<td>'+JSON.stringify(value2[value3]).replace(/:"/g, ': "')+'</td>'; 
+        table_html += '<td>'+JSON.stringify(value2[value3]).replace(/:"/g, ': "').replace(/,/g, ', ')+'</td>'; 
       } else if (value3 in value2) {
         table_html += '<td>'+value2[value3]+'</td>';
       }
