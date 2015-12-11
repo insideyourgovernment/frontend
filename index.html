@@ -166,6 +166,45 @@ background:yellow;
 </style>
 <script src="https://code.jquery.com/jquery-git2.min.js"></script>
 <script>
+    function cell(value2, value3) {
+        table_html = '';
+if (!(value3 in value2)) {
+        table_html += '<td></td>';
+      } else if (value3.indexOf("photo") > -1) {
+        table_html += '<td class="photo"><img src="'+value2[value3]+'" style="max-width:100px" /></td>';
+      } else if (value3 == 'links') {
+        table_html += '<td><ul>';
+        $.each(value2[value3], function(linki, link) {
+          table_html += '<li><a href="'+link['url']+'">'+link['name']+'</a></li>';
+        });
+        table_html += '</ul></td>';
+      } else if (value3.indexOf('link') > -1) {
+        table_html += '<td><a href="'+value2[value3]+'">'+value2[value3]+'</a></td>';
+      } else if (value3 == 'Summarized results') {
+        var sresults = value2[value3];
+        table_html += '<td><table>';
+        $.each(sresults, function(eindex, employee) {
+          table_html += '<tr><th colspan="2">'+employee['heading']+'</th></tr>';
+          $.each(employee['allegations'], function(aindex, allegation) {
+            table_html += '<tr><th>'+allegation['heading']+'</th><td>'+allegation['allegation']+'</td></tr>';
+            if (stringStartsWith(allegation['opa_finding'], 'Sustained')) {
+              highlighting = ' class="highlight"';
+            } else {
+              highlighting = '';
+            }
+            table_html += '<tr><th>'+allegation['heading']+' OPA finding</th><td'+highlighting+'>'+allegation['opa_finding']+'</td></tr>';
+          });
+          table_html += '<tr><th>Final discipline</th><td>'+employee['final_discipline']+'</td></tr>';
+        });
+        table_html += '</table>';
+        table_html += '</td>';
+      } else if (String(value2[value3]).indexOf('[object Object]') > -1) {
+        table_html += '<td>'+JSON.stringify(value2[value3]).replace(/:"/g, ': "')+'</td>'; 
+      } else if (value3 in value2) {
+        table_html += '<td>'+value2[value3]+'</td>';
+      }
+        return table_html;
+    }
     if(typeof console === "undefined"){
     console = { log: function() { } };
   }
@@ -334,41 +373,7 @@ function addData(table, element, data, page) {
     table_html += '</tr>';
     table_html += '<tr>';
     $.each(fields, function(h, value3) {
-      if (!(value3 in value2)) {
-        table_html += '<td></td>';
-      } else if (value3.indexOf("photo") > -1) {
-        table_html += '<td class="photo"><img src="'+value2[value3]+'" style="max-width:100px" /></td>';
-      } else if (value3 == 'links') {
-        table_html += '<td><ul>';
-        $.each(value2[value3], function(linki, link) {
-          table_html += '<li><a href="'+link['url']+'">'+link['name']+'</a></li>';
-        });
-        table_html += '</ul></td>';
-      } else if (value3.indexOf('link') > -1) {
-        table_html += '<td><a href="'+value2[value3]+'">'+value2[value3]+'</a></td>';
-      } else if (value3 == 'Summarized results') {
-        var sresults = value2[value3];
-        table_html += '<td><table>';
-        $.each(sresults, function(eindex, employee) {
-          table_html += '<tr><th colspan="2">'+employee['heading']+'</th></tr>';
-          $.each(employee['allegations'], function(aindex, allegation) {
-            table_html += '<tr><th>'+allegation['heading']+'</th><td>'+allegation['allegation']+'</td></tr>';
-            if (stringStartsWith(allegation['opa_finding'], 'Sustained')) {
-              highlighting = ' class="highlight"';
-            } else {
-              highlighting = '';
-            }
-            table_html += '<tr><th>'+allegation['heading']+' OPA finding</th><td'+highlighting+'>'+allegation['opa_finding']+'</td></tr>';
-          });
-          table_html += '<tr><th>Final discipline</th><td>'+employee['final_discipline']+'</td></tr>';
-        });
-        table_html += '</table>';
-        table_html += '</td>';
-      } else if (String(value2[value3]).indexOf('[object Object]') > -1) {
-        table_html += '<td>'+JSON.stringify(value2[value3]).replace(/:"/g, ': "')+'</td>'; 
-      } else if (value3 in value2) {
-        table_html += '<td>'+value2[value3]+'</td>';
-      } 
+      table_html += cell(value2, value3); 
     });
     table_html += '</tr>';
     //appendLater(table_html, j*5)
