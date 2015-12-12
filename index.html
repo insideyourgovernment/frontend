@@ -205,7 +205,7 @@ if (!(value3 in value2)) {
         table_html += '</td>';
       } else if (String(value2[value3]).indexOf('[object Object]') > -1 || Array.isArray(value2[value3])) {
         if (typeof value2[value3].epoch_time != 'undefined') {
-          var date = new Date(value2[value3]*1000);
+          var date = new Date(value2[value3].epoch_time*1000);
           table_html += '<td>'+date+'</td>';
         } else {
           table_html += '<td>'+JSON.stringify(value2[value3]).replace(/:"/g, ': "').replace(/,/g, ', ')+'</td>';
