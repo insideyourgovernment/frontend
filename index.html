@@ -204,7 +204,12 @@ if (!(value3 in value2)) {
         table_html += '</table>';
         table_html += '</td>';
       } else if (String(value2[value3]).indexOf('[object Object]') > -1 || Array.isArray(value2[value3])) {
-        table_html += '<td>'+JSON.stringify(value2[value3]).replace(/:"/g, ': "').replace(/,/g, ', ')+'</td>'; 
+        if (typeof value2[value3].epoch_time != 'undefined') {
+          var date = new Date(value2[value3]);
+          table_html += '<td>'+date+'</td>';
+        } else {
+          table_html += '<td>'+JSON.stringify(value2[value3]).replace(/:"/g, ': "').replace(/,/g, ', ')+'</td>';
+        }
       } else if (value3 in value2) {
         table_html += '<td>'+value2[value3]+'</td>';
       }
