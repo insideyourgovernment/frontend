@@ -15,7 +15,7 @@
   //  email: 'user@email.com', // replace with the email of the current user
 
     // add any other properties...
-  //});
+  });
 </script><title>Inside Your Government</title>
 <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700' rel='stylesheet' type='text/css'>
@@ -560,7 +560,7 @@ function processHash() {
           }
         })}, 1000);
     } else {
-        hash = 'home';
+        
         document.title = $('#'+hash+'_main h2').text() + ' | Inside Your Government';
         gaTrack(window.location.hash.substring(2), document.title + ' | Inside Your Government');
         $('#'+hash+'_main').show();
@@ -568,7 +568,7 @@ function processHash() {
     }    
     
   } else {
-    window.location.hash = '#!/data/';
+    window.location.hash = '#!/home/';
     processHash();
   }
 }
