@@ -1,6 +1,22 @@
 <html>
 <head>
-<title>Inside Your Government</title>
+<script>
+  !function(g,s,q,r,d){r=g[r]=g[r]||function(){(r.q=r.q||[]).push(
+  arguments)};d=s.createElement(q);q=s.getElementsByTagName(q)[0];
+  d.src='//d1l6p2sc9645hc.cloudfront.net/tracker.js';q.parentNode.
+  insertBefore(d,q)}(window,document,'script','_gs');
+
+  _gs('GSN-445923-O');
+
+  // to track the current user in GoSquared People...
+  _gs('identify', {
+    id:    1234,             // replace with the id of the current user
+    name:  'User Name',      // replace with the name of the current user
+    email: 'user@email.com', // replace with the email of the current user
+
+    // add any other properties...
+  });
+</script><title>Inside Your Government</title>
 <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700' rel='stylesheet' type='text/css'>
 <style>
@@ -58,6 +74,7 @@ margin:0;
 }
 #header {
 display:block;
+width:500px;
 text-decoration:none;
 padding:10px 20px;
 background:#000 url('/img/logo2.png') no-repeat 10px 10px;
