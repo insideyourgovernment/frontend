@@ -1,4 +1,8 @@
-"\n.data_table {\n  width:100%;\n    overflow:scroll-x;\n    display:block;\n}\n.data_table th {\n\nfont-weight:bold;\n}\n.data_table th, .data_table td {\nfont-size:.8em;\n  padding:5px;\n  vertical-align:top;\n  text-align:left;\n  border:1px solid #000;\n}\n.admin {\ndisplay:none;\n}"
+"\n.data_table {\n  width:100%;\n    overflow-x:auto;\n    display:block;\n}\n.data_table th {\n\nfont-weight:bold;\n}\n.data_table th, .data_table td {\nfont-size:.8em;\n  padding:5px;\n  vertical-align:top;\n  text-align:left;\n  border:1px solid #000;\n}\n.admin {\ndisplay:none;\n}"
+{"patch":[[[[0,"-x:a"],[-1,"uto"],[0,";\n  "]],41,41,11,8]],"time":1450724345549}
+{"patch":[[[[0,"rflow-x:"],[-1,"a"],[1,"scroll-x"],[0,";\n    di"]],36,36,17,24]],"time":1450724343552}
+{"patch":[[[[0,"verflow-"],[-1,"x"],[0,":scroll-"]],34,34,17,16]],"time":1450724340323}
+{"patch":[[[[0,"overflow"],[-1,"-"],[0,":scroll-"]],33,33,17,16]],"time":1450724338360}
 {"patch":[[[[0,"ay:block"],[-1,";"],[0,"\n}\n.data"]],61,61,17,16]],"time":1450724326866}
 {"patch":[[[[0,"lay:"],[-1,"block"],[0,"\n}\n."]],60,60,13,8]],"time":1450724324862}
 {"patch":[[[[0,"-x;\n    "],[-1,"display:"],[0,"\n}\n.data"]],48,48,24,16]],"time":1450724322862}
