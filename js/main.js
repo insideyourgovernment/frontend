@@ -84,11 +84,11 @@ function addData(table, element, data, page) {
     setTimeout(function() {highlight(window.payload['has_string_in_any_field'], $('.data_results td'))}, 1500);
   }
   var title = data['table']['name']+additional;
-  var header = '<section class="content-header"><h1>'+title+'</h1></section><section class="content">';
+  var header = '<section class="content-header"><h1>'+title+'</h1></section>';
   element.append(header);
   header = '';
   document.title = title + " | Inside Your Government";
-  header = '<a href="#!/data/?table='+data['table']['id']+'">Link to table without any subqueries</a> ';
+  header = '<section class="content"><a href="#!/data/?table='+data['table']['id']+'">Link to table without any subqueries</a> ';
   header += 'Raw data in JSON format at <span class="url"></span>';
   header += '<br/><strong>Search:</strong> <input type="text" class="search_query" /><input type="button" data-table="'+data['table']['id']+'" class="go" value="go" />';
   if (data['number_of_rows'] == 1) {
