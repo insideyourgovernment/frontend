@@ -15,7 +15,7 @@ if (!(value3 in value2)) {
           table_html += '<li><a href="'+link['url']+'">'+link['name']+'</a></li>';
         });
         table_html += '</ul></td>';
-      } else if (value3.indexOf('link') > -1 || value3.indexOf('url') > -1) {
+      } else if (value3.indexOf('link') > -1 || value3.indexOf('url') > -1 || value3.indexOf('url') > -1) {
         table_html += '<td><a href="'+value2[value3]+'">'+value2[value3]+'</a></td>';
       } else if (value3 == 'Summarized results') {
         var sresults = value2[value3];
