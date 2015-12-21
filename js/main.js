@@ -84,7 +84,7 @@ function addData(table, element, data, page) {
     setTimeout(function() {highlight(window.payload['has_string_in_any_field'], $('.data_results td'))}, 1500);
   }
   var title = data['table']['name']+additional;
-  var header = '<h1>'+title+'</h1>';
+  var header = '<section class="content-header"><h1>'+title+'</h1></section><section class="content">';
   element.append(header);
   header = '';
   document.title = title + " | Inside Your Government";
@@ -193,7 +193,7 @@ function addData(table, element, data, page) {
   element.append(header);
   //header = '';
   
-  var table_html = '<table class="data_table data_results"></table><div class="pages"></div>';
+  var table_html = '<table class="data_table data_results"></table><div class="pages"></div></section>';
   element.append(table_html);
   table_html = '';
   if (page * per_page < number_of_records) {
