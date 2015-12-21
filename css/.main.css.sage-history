@@ -1,0 +1,2 @@
+"\n.data_table {\n  width:100%;\n}\n.data_table th {\n\nfont-weight:bold;\n}\n.data_table th, .data_table td {\nfont-size:.8em;\n  padding:5px;\n  vertical-align:top;\n  text-align:left;\n  border:1px solid #000;\n}\n.admin {\ndisplay:none;\n}"
+{"patch":[[[[-1,"\n.data_table {\n  width:100%;\n}\n.data_table th {\n\nfont-weight:bold;\n}\n.data_table th, .data_table td {\nfont-size:.8em;\n  padding:5px;\n  vertical-align:top;\n  text-align:left;\n  border:1px solid #000;\n}\n.admin {\ndisplay:none;\n}"]],0,0,225,0]],"time":1450720990480}
