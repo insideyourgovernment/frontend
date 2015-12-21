@@ -84,7 +84,7 @@ function addData(table, element, data, page) {
     setTimeout(function() {highlight(window.payload['has_string_in_any_field'], $('.data_results td'))}, 1500);
   }
   var title = data['table']['name']+additional;
-  var header = '<h2>'+title+'</h2>';
+  var header = '<h1>'+title+'</h1>';
   element.append(header);
   header = '';
   document.title = title + " | Inside Your Government";
@@ -376,7 +376,7 @@ function processHash() {
         })}, 1000);
     } else {
         
-        document.title = $('#'+hash+'_main h2').text() + ' | Inside Your Government';
+        document.title = $('#'+hash+'_main h1').text() + ' | Inside Your Government';
         gaTrack(window.location.hash.substring(2), document.title + ' | Inside Your Government');
         $('#'+hash+'_main').show();
         
