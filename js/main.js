@@ -186,11 +186,11 @@ function addData(table, element, data, page) {
   });
   header += '<h3>The data</h3>';
   header += '<div class="pages"></div>';
-  element.append(header);
+  //element.append(header);
   //header = '';
   
   var table_html = '<table class="data_table data_results"></table><div class="pages"></div></section>';
-  element.append(table_html);
+  element.append(header+table_html);
   table_html = '';
   if (page * per_page < number_of_records) {
       var rows = data['data'].slice((page-1) * per_page,page * per_page);
