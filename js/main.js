@@ -96,8 +96,6 @@ function addData(table, element, data, page) {
   } else {
     header += ' ('+data['number_of_rows']+' '+data['name_for_rows']+')';
   }
-  element.append(header);
-  header = '';
   $.each(data['field_selectors'], function(i, value) {
     if (value['selector'] == 'checkbox') {
         var isboth = '';
@@ -178,8 +176,6 @@ function addData(table, element, data, page) {
       header += '</table>';
     }
   }
-  element.append(header);
-  header = '';
   header += '<h3>Rankings</h3>';
   $.each(data['group_counts'], function(j, value2) {
       header += '<table class="data_table"><tr><th colspan="2">'+value2[0]+'</th></tr>';
