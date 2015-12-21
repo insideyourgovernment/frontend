@@ -482,6 +482,27 @@ Welcome to Inside Your Government: News and information about government agencie
 
         <!-- Main content -->
         <section class="content">
+            <div class="main" id="about_main"><h2>About Inside Your Government</h2></div>
+<div class="main" id="data_main"><h2>Open Data</h2>
+
+<div id="data_admin" class="admin"><strong>Action:</strong> 
+<select id="data_admin_action">
+<option></option>
+<option value="table_create">Table create</option>
+<option value="insert">Insert</option>
+<option value="update">Update</option>
+</select>
+<strong>Table name:</strong> <input type="text" id="table_name_for_action" /> 
+<strong>Table:</strong> <select id="tables_for_action">
+<option></option>
+</select>
+<strong>Dictionary:</strong> <input type="text" id="dictionary_for_action" />
+<input type="button" value="Run" />
+</div>
+
+<div class="divs_of_tables" data-action="do_row_mapping" data-table="tables" data-field_for_key="categories" data-field_for_url="id" data-field_to_name_link="name" data-rows_per_page="500"></div>
+
+</div>
           <p>When government impacts our lives, we often find ourselves unprepared and uninformed.  A neighbor’s home is burglarized - is there a pattern in the area?  A house is damaged from flood or fire - how does the permit process work and how long will it take?  An addiction treatment center is locating nearby, what information is available to residents and the public?</p>
           <p>When we need government information, we often can't wait days or weeks. We also need to know that we are getting ALL the relevent information.  And we want to be kept up to date on the things we care about.  This is the goal of insideyourgovernment.com, providing the news and information anyone needs and wants about government agencies.</p>
           <p>InsideYourGovernment.com is run by Tim Clemans, former computer programmer at the Seattle Police Department. At Seattle Police Tim developed software for the 911 Communications Center, Realtime Crime Center, Public Affairs Unit, and the Public Disclosure Unit.  In working to make emergency information readily available to dispatchers, and crime information available to the public, he came to recognize the crucial importance of making government data easily accessible both internally and externally.  He is currently collecting almost all records from 39 cities in King County, Washington to put on-line for the general public to use.</p>
