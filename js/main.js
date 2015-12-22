@@ -243,6 +243,7 @@ function addData(table, element, data, page) {
     }
 }
 function addUrl(element, url) {
+    console.log('url', url);
   window.location.hash = '!/information/'+url.substring(52);
   //console.log('add url '+url);
   setTimeout(function() {element.find('.url').html('<a href="'+url+'">'+url+'</a>');}, 500);
