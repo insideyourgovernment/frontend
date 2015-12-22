@@ -71,21 +71,21 @@
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <a href="#" class="sidebar-toggle" information-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav" style="display:none">
               <!-- Messages: style can be found in dropdown.less-->
               <li class="dropdown messages-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle" information-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
                   <span class="label label-success">4</span>
                 </a>
                 <ul class="dropdown-menu">
                   <li class="header">You have 4 messages</li>
                   <li>
-                    <!-- inner menu: contains the actual data -->
+                    <!-- inner menu: contains the actual information -->
                     <ul class="menu">
                       <li><!-- start message -->
                         <a href="#">
@@ -154,14 +154,14 @@
               </li>
               <!-- Notifications: style can be found in dropdown.less -->
               <li class="dropdown notifications-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle" information-toggle="dropdown">
                   <i class="fa fa-bell-o"></i>
                   <span class="label label-warning">10</span>
                 </a>
                 <ul class="dropdown-menu">
                   <li class="header">You have 10 notifications</li>
                   <li>
-                    <!-- inner menu: contains the actual data -->
+                    <!-- inner menu: contains the actual information -->
                     <ul class="menu">
                       <li>
                         <a href="#">
@@ -195,14 +195,14 @@
               </li>
               <!-- Tasks: style can be found in dropdown.less -->
               <li class="dropdown tasks-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle" information-toggle="dropdown">
                   <i class="fa fa-flag-o"></i>
                   <span class="label label-danger">9</span>
                 </a>
                 <ul class="dropdown-menu">
                   <li class="header">You have 9 tasks</li>
                   <li>
-                    <!-- inner menu: contains the actual data -->
+                    <!-- inner menu: contains the actual information -->
                     <ul class="menu">
                       <li><!-- Task item -->
                         <a href="#">
@@ -266,7 +266,7 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle" information-toggle="dropdown">
                   <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                   <span class="hidden-xs">Alexander Pierce</span>
                 </a>
@@ -304,7 +304,7 @@
               </li>
               <!-- Control Sidebar Toggle Button -->
               <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                <a href="#" information-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
               </li>
             </ul>
           </div>
@@ -340,7 +340,7 @@
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
-              <a href="/#!/data/">
+              <a href="/#!/about/">
                 <i class="glyphicon glyphicon-question-sign"></i> <span>About IYG</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
@@ -349,7 +349,7 @@
               </ul>
             </li>
             <li class="treeview">
-              <a href="#">
+              <a href="/#!/news/">
                 <i class="fa fa-newspaper-o"></i> <span>News</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
@@ -358,7 +358,7 @@
               </ul>
             </li>
             <li class="treeview">
-              <a href="#">
+              <a href="/#!/information/">
                 <i class="glyphicon glyphicon-info-sign"></i> <span>Information</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
@@ -378,11 +378,11 @@
 
         
             
-<div class="main" id="data_main"><section class="content-header"><h1>Information about government agencies</h1></section>
+<div class="main" id="information_main"><section class="content-header"><h1>Information about government agencies</h1></section>
 <!-- Main content -->
         <section class="content">
-<div id="data_admin" class="admin"><strong>Action:</strong> 
-<select id="data_admin_action">
+<div id="information_admin" class="admin"><strong>Action:</strong> 
+<select id="information_admin_action">
 <option></option>
 <option value="table_create">Table create</option>
 <option value="insert">Insert</option>
@@ -396,7 +396,7 @@
 <input type="button" value="Run" />
 </div>
 
-<div class="divs_of_tables" data-action="do_row_mapping" data-table="tables" data-field_for_key="categories" data-field_for_url="id" data-field_to_name_link="name" data-rows_per_page="500"></div>
+<div class="divs_of_tables" information-action="do_row_mapping" information-table="tables" information-field_for_key="categories" information-field_for_url="id" information-field_to_name_link="name" information-rows_per_page="500"></div>
     </section>
 </div>
           <div class="main" id="home_main">
@@ -413,7 +413,7 @@ Welcome to Inside Your Government: News and information about government agencie
               <section class="content">
           <p>When government impacts our lives, we often find ourselves unprepared and uninformed.  A neighbor’s home is burglarized - is there a pattern in the area?  A house is damaged from flood or fire - how does the permit process work and how long will it take?  An addiction treatment center is locating nearby, what information is available to residents and the public?</p>
           <p>When we need government information, we often can't wait days or weeks. We also need to know that we are getting ALL the relevent information.  And we want to be kept up to date on the things we care about.  This is the goal of insideyourgovernment.com, providing the news and information anyone needs and wants about government agencies.</p>
-          <p>InsideYourGovernment.com is run by Tim Clemans, former computer programmer at the Seattle Police Department. At Seattle Police Tim developed software for the 911 Communications Center, Realtime Crime Center, Public Affairs Unit, and the Public Disclosure Unit.  In working to make emergency information readily available to dispatchers, and crime information available to the public, he came to recognize the crucial importance of making government data easily accessible both internally and externally.  He is currently collecting almost all records from 39 cities in King County, Washington to put on-line for the general public to use.</p>
+          <p>InsideYourGovernment.com is run by Tim Clemans, former computer programmer at the Seattle Police Department. At Seattle Police Tim developed software for the 911 Communications Center, Realtime Crime Center, Public Affairs Unit, and the Public Disclosure Unit.  In working to make emergency information readily available to dispatchers, and crime information available to the public, he came to recognize the crucial importance of making government information easily accessible both internally and externally.  He is currently collecting almost all records from 39 cities in King County, Washington to put on-line for the general public to use.</p>
           <!-- Small boxes (Stat box) -->
           <div class="row">
             <div class="col-lg-3 col-xs-6">
@@ -478,8 +478,8 @@ Welcome to Inside Your Government: News and information about government agencie
               <div class="nav-tabs-custom">
                 <!-- Tabs within a box -->
                 <ul class="nav nav-tabs pull-right">
-                  <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-                  <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
+                  <li class="active"><a href="#revenue-chart" information-toggle="tab">Area</a></li>
+                  <li><a href="#sales-chart" information-toggle="tab">Donut</a></li>
                   <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
                 </ul>
                 <div class="tab-content no-padding">
@@ -494,8 +494,8 @@ Welcome to Inside Your Government: News and information about government agencie
                 <div class="box-header">
                   <i class="fa fa-comments-o"></i>
                   <h3 class="box-title">Chat</h3>
-                  <div class="box-tools pull-right" data-toggle="tooltip" title="Status">
-                    <div class="btn-group" data-toggle="btn-toggle" >
+                  <div class="box-tools pull-right" information-toggle="tooltip" title="Status">
+                    <div class="btn-group" information-toggle="btn-toggle" >
                       <button type="button" class="btn btn-default btn-sm active"><i class="fa fa-square text-green"></i></button>
                       <button type="button" class="btn btn-default btn-sm"><i class="fa fa-square text-red"></i></button>
                     </div>
@@ -675,7 +675,7 @@ Welcome to Inside Your Government: News and information about government agencie
                   <h3 class="box-title">Quick Email</h3>
                   <!-- tools box -->
                   <div class="pull-right box-tools">
-                    <button class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+                    <button class="btn btn-info btn-sm" information-widget="remove" information-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
                   </div><!-- /. tools -->
                 </div>
                 <div class="box-body">
@@ -705,8 +705,8 @@ Welcome to Inside Your Government: News and information about government agencie
                 <div class="box-header">
                   <!-- tools box -->
                   <div class="pull-right box-tools">
-                    <button class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="Date range"><i class="fa fa-calendar"></i></button>
-                    <button class="btn btn-primary btn-sm pull-right" data-widget="collapse" data-toggle="tooltip" title="Collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-primary btn-sm daterange pull-right" information-toggle="tooltip" title="Date range"><i class="fa fa-calendar"></i></button>
+                    <button class="btn btn-primary btn-sm pull-right" information-widget="collapse" information-toggle="tooltip" title="Collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
                   </div><!-- /. tools -->
 
                   <i class="fa fa-map-marker"></i>
@@ -742,8 +742,8 @@ Welcome to Inside Your Government: News and information about government agencie
                   <i class="fa fa-th"></i>
                   <h3 class="box-title">Sales Graph</h3>
                   <div class="box-tools pull-right">
-                    <button class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
+                    <button class="btn bg-teal btn-sm" information-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn bg-teal btn-sm" information-widget="remove"><i class="fa fa-times"></i></button>
                   </div>
                 </div>
                 <div class="box-body border-radius-none">
@@ -752,15 +752,15 @@ Welcome to Inside Your Government: News and information about government agencie
                 <div class="box-footer no-border">
                   <div class="row">
                     <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                      <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                      <input type="text" class="knob" information-readonly="true" value="20" information-width="60" information-height="60" information-fgColor="#39CCCC">
                       <div class="knob-label">Mail-Orders</div>
                     </div><!-- ./col -->
                     <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                      <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                      <input type="text" class="knob" information-readonly="true" value="50" information-width="60" information-height="60" information-fgColor="#39CCCC">
                       <div class="knob-label">Online</div>
                     </div><!-- ./col -->
                     <div class="col-xs-4 text-center">
-                      <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                      <input type="text" class="knob" information-readonly="true" value="30" information-width="60" information-height="60" information-fgColor="#39CCCC">
                       <div class="knob-label">In-Store</div>
                     </div><!-- ./col -->
                   </div><!-- /.row -->
@@ -776,7 +776,7 @@ Welcome to Inside Your Government: News and information about government agencie
                   <div class="pull-right box-tools">
                     <!-- button with a dropdown -->
                     <div class="btn-group">
-                      <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
+                      <button class="btn btn-success btn-sm dropdown-toggle" information-toggle="dropdown"><i class="fa fa-bars"></i></button>
                       <ul class="dropdown-menu pull-right" role="menu">
                         <li><a href="#">Add new event</a></li>
                         <li><a href="#">Clear events</a></li>
@@ -784,8 +784,8 @@ Welcome to Inside Your Government: News and information about government agencie
                         <li><a href="#">View calendar</a></li>
                       </ul>
                     </div>
-                    <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
+                    <button class="btn btn-success btn-sm" information-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-success btn-sm" information-widget="remove"><i class="fa fa-times"></i></button>
                   </div><!-- /. tools -->
                 </div><!-- /.box-header -->
                 <div class="box-body no-padding">
@@ -851,8 +851,8 @@ Welcome to Inside Your Government: News and information about government agencie
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-          <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-          <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+          <li><a href="#control-sidebar-home-tab" information-toggle="tab"><i class="fa fa-home"></i></a></li>
+          <li><a href="#control-sidebar-settings-tab" information-toggle="tab"><i class="fa fa-gears"></i></a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
