@@ -71,32 +71,32 @@ function stringStartsWith (string, prefix) {
   return string.slice(0, prefix.length) == prefix;
 }
 function appendLater(what, when) {
-  setTimeout(function() {$('.information_results').append(what)}, when);   
+  setTimeout(function() {$('.data_results').append(what)}, when);   
 }
-function addinformation(table, element, information, page) {
+function addData(table, element, data, page) {
   element.html('');
-  window.payload = information['payload'];
+  window.payload = data['payload'];
   //console.log(window.payload);  
-  //console.log('fields '+information['fields']);
+  //console.log('fields '+data['fields']);
   var additional = '';
   if ('has_string_in_any_field' in window.payload) {
     additional = ' mentioning "'+window.payload['has_string_in_any_field']+'"';
-    setTimeout(function() {highlight(window.payload['has_string_in_any_field'], $('.information_results td'))}, 1500);
+    setTimeout(function() {highlight(window.payload['has_string_in_any_field'], $('.data_results td'))}, 1500);
   }
-  var title = information['table']['name']+additional;
+  var title = data['table']['name']+additional;
   var header = '<section class="content-header"><h1>'+title+'</h1></section>';
   element.append(header);
   header = '';
   document.title = title + " | Inside Your Government";
-  header = '<section class="content"><a href="#!/information/?table='+information['table']['id']+'">Link to table without any subqueries</a> ';
-  header += 'Raw information in JSON format at <span class="url"></span>';
-  header += '<br/><strong>Search:</strong> <input type="text" class="search_query" /><input type="button" data-table="'+information['table']['id']+'" class="go" value="go" />';
-  if (information['number_of_rows'] == 1) {
-    header += ' ('+information['number_of_rows']+' row)';
+  header = '<section class="content"><a href="#!/data/?table='+data['table']['id']+'">Link to table without any subqueries</a> ';
+  header += 'Raw data in JSON format at <span class="url"></span>';
+  header += '<br/><strong>Search:</strong> <input type="text" class="search_query" /><input type="button" data-table="'+data['table']['id']+'" class="go" value="go" />';
+  if (data['number_of_rows'] == 1) {
+    header += ' ('+data['number_of_rows']+' row)';
   } else {
-    header += ' ('+information['number_of_rows']+' '+information['name_for_rows']+')';
+    header += ' ('+data['number_of_rows']+' '+data['name_for_rows']+')';
   }
-  $.each(information['field_selectors'], function(i, value) {
+  $.each(data['field_selectors'], function(i, value) {
     if (value['selector'] == 'checkbox') {
         var isboth = '';
         var istrue = '';  
@@ -153,7 +153,7 @@ function addinformation(table, element, information, page) {
   header += ' <strong>Field:</strong> ';
   header += '<select class="field_for_sorting">';
   header += '<option value="" selected></option>';
-  $.each(information['fields'], function(i, value) {
+  $.each(data['fields'], function(i, value) {
     header += '<option value="'+value+'">'+value+'</option>';
   });
   header += '</select>';
@@ -162,48 +162,48 @@ function addinformation(table, element, information, page) {
   header += '<option value="desc" selected>descending</option>';
   header += '<option value="asc">ascending</option>';   
   header += '</select>';
-  if ('percentages' in information) {
-    if (information['percentages'].length > 0) {
+  if ('percentages' in data) {
+    if (data['percentages'].length > 0) {
       header += '<h3>Auto generated analysis</h3>';
-      header += '<table class="information_table percentages"><tr><th>Field</th><th>Value</th><th>Percentage</th><th>Sentence</th></tr>';
+      header += '<table class="data_table percentages"><tr><th>Field</th><th>Value</th><th>Percentage</th><th>Sentence</th></tr>';
       
-      $.each(information['percentages'], function(i, value) {
+      $.each(data['percentages'], function(i, value) {
         new_payload = clone(window.payload);
         new_payload['filter'] = {};
         new_payload['filter'][value['field']] = true;
-        header += '<tr><td>'+value['field']+'</td><td><a href="/#!/information/?payload='+encodeURIComponent(JSON.stringify(new_payload))+'">'+value['value']+'</a></td><td>'+value['percentage']+'</td><td>'+value['sentence']+'</tr>';
+        header += '<tr><td>'+value['field']+'</td><td><a href="/#!/data/?payload='+encodeURIComponent(JSON.stringify(new_payload))+'">'+value['value']+'</a></td><td>'+value['percentage']+'</td><td>'+value['sentence']+'</tr>';
       });
       header += '</table>';
     }
   }
   header += '<h3>Rankings</h3>';
-  $.each(information['group_counts'], function(j, value2) {
-      header += '<table class="information_table"><tr><th colspan="2">'+value2[0]+'</th></tr>';
+  $.each(data['group_counts'], function(j, value2) {
+      header += '<table class="data_table"><tr><th colspan="2">'+value2[0]+'</th></tr>';
       $.each(value2[1], function(h, value3) {
           header += '<tr><td>'+JSON.stringify(value3[0])+'</td><td>'+value3[1]+'</td></tr>';
       });
       header += '</table>';
   });
-  header += '<h3>The information</h3>';
+  header += '<h3>The data</h3>';
   header += '<div class="pages"></div>';
   //element.append(header);
   //header = '';
   
-  var table_html = '<table class="information_table information_results"></table><div class="pages"></div></section>';
+  var table_html = '<table class="data_table data_results"></table><div class="pages"></div></section>';
   element.append(header+table_html);
   table_html = '';
   if (page * per_page < number_of_records) {
-      var rows = information['information'].slice((page-1) * per_page,page * per_page);
+      var rows = data['data'].slice((page-1) * per_page,page * per_page);
   } else {
-      var rows = information['information'].slice((page-1) * per_page);
+      var rows = data['data'].slice((page-1) * per_page);
   }
   $.each(rows, function(j, value2) {
     table_html += '<tr>';
     
-    if ('default_fields_to_display' in information['table']) {
-      var fields = information['table']['default_fields_to_display'];
+    if ('default_fields_to_display' in data['table']) {
+      var fields = data['table']['default_fields_to_display'];
     } else {
-      var fields = information['fields'];
+      var fields = data['fields'];
     }
     $.each(fields, function(i, value) {
       table_html += '<th>'+value+'</th>';
@@ -215,13 +215,13 @@ function addinformation(table, element, information, page) {
     });
     table_html += '</tr>';
     //appendLater(table_html, j*5)
-    //$('.information_results').append(table_html);
+    //$('.data_results').append(table_html);
     //console.log(table_html);
   });
   
   //table_html += '</table>';
-  setTimeout(function() {$('.information_results').html(table_html);}, 1000);
-    var number_of_records = information['number_of_rows'];
+  setTimeout(function() {$('.data_results').html(table_html);}, 1000);
+    var number_of_records = data['number_of_rows'];
     var per_page = 10
     var pages = Math.floor(number_of_records / per_page);
     if (pages > 1) {
@@ -243,12 +243,12 @@ function addinformation(table, element, information, page) {
     }
 }
 function addUrl(element, url) {
-  window.location.hash = '!/information/'+url.substring(45);
+  window.location.hash = '!/data/'+url.substring(45);
   //console.log('add url '+url);
   setTimeout(function() {element.find('.url').html('<a href="'+url+'">'+url+'</a>');}, 500);
 }
-function getinformation(table, element, other) {
-  element.text('Loading the information');
+function getData(table, element, other) {
+  element.text('Loading the data');
   var params = {'table': table};
   if (other) {
     var params = other;
@@ -256,37 +256,37 @@ function getinformation(table, element, other) {
   }
   $.ajax({
       url: 'https://api.insideyourgovernment.com/retrive/',
-      information: {'payload': JSON.stringify(params)},
-      informationType: 'json',
+      data: {'payload': JSON.stringify(params)},
+      dataType: 'json',
       complete : function(){
         //console.log('url', this.url);
           addUrl(element, this.url);
       },
-      success: function(information){
-        window.information = information;
-        addinformation(table, element, window.information, 1);
+      success: function(data){
+        window.data = data;
+        addData(table, element, window.data, 1);
       }
   });
 }
-function getinformationForPayload(payload, element) {
-    element.text('Loading the information');
+function getDataForPayload(payload, element) {
+    element.text('Loading the data');
   //console.log('type '+String(payload) == '[object Object]');
   if (String(payload) == '[object Object]') {
     $.ajax({
         url: 'https://api.insideyourgovernment.com/retrive/',
-        information: {'payload': JSON.stringify(window.payload)},
-        informationType: 'json',
+        data: {'payload': JSON.stringify(window.payload)},
+        dataType: 'json',
         complete : function(){
           //console.log('url', this.url);
             addUrl(element, this.url);
         },
-        success: function(information){
-          var table = information['table'];
-          window.information = information;
-          addinformation(table, element, information, 1);
-          if ('payload' in information) {
-            if ('has_string_in_any_field' in information['payload']) {
-              setTimeout(function() {$('.search_query').val(information['payload']['has_string_in_any_field'])}, 1000);
+        success: function(data){
+          var table = data['table'];
+          window.data = data;
+          addData(table, element, data, 1);
+          if ('payload' in data) {
+            if ('has_string_in_any_field' in data['payload']) {
+              setTimeout(function() {$('.search_query').val(data['payload']['has_string_in_any_field'])}, 1000);
             }
           }
         }
@@ -297,18 +297,18 @@ function getinformationForPayload(payload, element) {
     $.ajax({
         url: 'https://api.insideyourgovernment.com/retrive/?payload='+payload,
         
-        informationType: 'json',
+        dataType: 'json',
         complete : function(){
           //console.log('url', this.url);
             addUrl(element, this.url);
         },
-        success: function(information){
-          window.information = information;
-          var table = information['table'];
-          addinformation(table, element, information, 1);
-          if ('payload' in information) {
-            if ('has_string_in_any_field' in information['payload']) {
-              setTimeout(function() {$('.search_query').val(information['payload']['has_string_in_any_field'])}, 500);
+        success: function(data){
+          window.data = data;
+          var table = data['table'];
+          addData(table, element, data, 1);
+          if ('payload' in data) {
+            if ('has_string_in_any_field' in data['payload']) {
+              setTimeout(function() {$('.search_query').val(data['payload']['has_string_in_any_field'])}, 500);
             }
           }
         }
@@ -348,10 +348,10 @@ function processHash() {
             this.page.url = window.location;
           }
         });
-    } else if (hash.substring(0, 12) == 'information/?table=') {
-        var table = hash.substring(12);
+    } else if (hash.substring(0, 19) == 'information/?table=') {
+        var table = hash.substring(19);
         //console.log(table);
-        getinformation(table, $('#working_space'));
+        getData(table, $('#working_space'));
         DISQUS.reset({
           reload: true,
           config: function () {  
@@ -359,10 +359,10 @@ function processHash() {
             this.page.url = window.location;
           }
         });
-    } else if (hash.substring(0, 14) == 'information/?payload=') {
-        var payload = hash.substring(14);
+    } else if (hash.substring(0, 21) == 'information/?payload=') {
+        var payload = hash.substring(21);
         //console.log(table);
-        getinformationForPayload(payload, $('#working_space'));
+        getDataForPayload(payload, $('#working_space'));
         setTimeout(function() {DISQUS.reset({
           reload: true,
           config: function () {  
@@ -426,26 +426,26 @@ $(function() {
   });
   //console.log(document.cookie);
   //console.log(getCookie('session'));
-  $.get('https://api.insideyourgovernment.com/get_session_info/', {'session': getCookie('session')}, function(information) {
-      //console.log(information);
+  $.get('https://api.insideyourgovernment.com/get_session_info/', {'session': getCookie('session')}, function(data) {
+      //console.log(data);
       $('#login_box').hide();
       $('#account_box').show(); 
-      if (information['is_admin']) {
+      if (data['is_admin']) {
         $('.admin').show();
-        $.get('https://api.insideyourgovernment.com/tables/', function(information) {
-           $.each(information, function(i, value) {
+        $.get('https://api.insideyourgovernment.com/tables/', function(data) {
+           $.each(data, function(i, value) {
              $('#tables_for_action').append('<option value="'+value+'">'+value+'</option>');
            });           
         });
       }
     }); 
   $('#login').click(function() {
-    $.post('https://api.insideyourgovernment.com/login/', {'email': $('#email').val(), 'password': $('#password').val()}, function(information) {
-        //console.log(typeof information);
-        //console.log(information['session_id']);
-      document.cookie="session="+information['session_id'];
+    $.post('https://api.insideyourgovernment.com/login/', {'email': $('#email').val(), 'password': $('#password').val()}, function(data) {
+        //console.log(typeof data);
+        //console.log(data['session_id']);
+      document.cookie="session="+data['session_id'];
       //console.log(document.cookie);
-      //console.log(information);  
+      //console.log(data);  
     });  
   });
   $.fn.getAttributes = function() {
@@ -465,19 +465,19 @@ $(function() {
     }
     return attributes;
   };
-  function addDivsOfTables(theObj, information) {
-    //theObj.html(JSON.stringify(information));
-    $.each(information['keys'], function(i, value) {
-      var table = '<table class="information_table">';
+  function addDivsOfTables(theObj, data) {
+    //theObj.html(JSON.stringify(data));
+    $.each(data['keys'], function(i, value) {
+      var table = '<table class="data_table">';
       table += '<tr><th>Link</th>';
-      $.each(information['table_fields'], function(j, value2) {
+      $.each(data['table_fields'], function(j, value2) {
         table += '<th>'+value2+'</th>';
       });
-      //console.log(value+' '+JSON.stringify(information[value]));
-      $.each(information['information'][value], function(j, value2) {
+      //console.log(value+' '+JSON.stringify(data[value]));
+      $.each(data['data'][value], function(j, value2) {
         table += '<tr>';
-        table += '<td><a href="/#!/information/?table='+value2[theObj.attr('data-field_for_url')]+'">'+value2[theObj.attr('data-field_to_name_link')]+'</a>';
-        $.each(information['table_fields'], function(h, value3) {
+        table += '<td><a href="/#!/data/?table='+value2[theObj.attr('data-field_for_url')]+'">'+value2[theObj.attr('data-field_to_name_link')]+'</a>';
+        $.each(data['table_fields'], function(h, value3) {
           table += cell(value2, value3);
         });
         table += '</tr>';
@@ -490,10 +490,10 @@ $(function() {
   function getDivsOfTables(theObj) {
     var params = theObj.getAttributes();
     //console.log('https://api.insideyourgovernment.com/retrive/?payload='+encodeURIComponent(JSON.stringify(params)))
-    $.get('https://api.insideyourgovernment.com/retrive/', {'payload': JSON.stringify(params)}, function(information) {
-      //console.log(information);
+    $.get('https://api.insideyourgovernment.com/retrive/', {'payload': JSON.stringify(params)}, function(data) {
+      //console.log(data);
         
-      addDivsOfTables(theObj, information);
+      addDivsOfTables(theObj, data);
     });
   }
   $('.divs_of_tables').each(function() {
@@ -502,7 +502,7 @@ $(function() {
 
   $('body').on('click', '.go', function() {
     var query = $(this).prev().val();
-    getinformation($(this).attr('data-table'), $('#working_space'), {'has_string_in_any_field': query});
+    getData($(this).attr('data-table'), $('#working_space'), {'has_string_in_any_field': query});
     setTimeout(function() {$('.search_query').val(query)}, 1000);
     setTimeout(function() {highlight($('.search_query').val(), $('#working_space td').not('.photo'))}, 1000);
   });
@@ -528,7 +528,7 @@ $(function() {
       //console.log($(this).val(), Boolean($(this).val()));
       window.payload['filter'][f] = ($(this).val() == 'true');
     }
-    getinformationForPayload(window.payload, $('#working_space'));
+    getDataForPayload(window.payload, $('#working_space'));
     
   });
   $('body').on('change', '.dropdown_selector', function(e) {
@@ -548,7 +548,7 @@ $(function() {
       //console.log($(this).val(), Boolean($(this).val()));
       window.payload['filter'][f] = $(this).val();
     }
-    getinformationForPayload(window.payload, $('#working_space'));
+    getDataForPayload(window.payload, $('#working_space'));
     
   }); 
    $('body').on('click', '.pages a', function(e) {
@@ -556,7 +556,7 @@ $(function() {
         $('.pages a').removeClass('current');
         $('.to_page_'+$(this).text()).addClass('current');
         window['page'] = parseInt($(this).text());
-        getinformationForPayload(window.information, $('#working_space'));
-        //addinformation(window.information['table']['id'], $('#working_space'), window.information, $(this).text());
+        getDataForPayload(window.data, $('#working_space'));
+        //addData(window.data['table']['id'], $('#working_space'), window.data, $(this).text());
    });
 });
