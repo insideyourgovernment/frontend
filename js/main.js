@@ -88,7 +88,7 @@ function addData(table, element, data, page) {
   element.append(header);
   header = '';
   document.title = title + " | Inside Your Government";
-  header = '<section class="content"><a href="#!/data/?table='+data['table']['id']+'">Link to table without any subqueries</a> ';
+  header = '<section class="content"><a href="#!/information/?table='+data['table']['id']+'">Link to table without any subqueries</a> ';
   header += 'Raw data in JSON format at <span class="url"></span>';
   header += '<br/><strong>Search:</strong> <input type="text" class="search_query" /><input type="button" data-table="'+data['table']['id']+'" class="go" value="go" />';
   if (data['number_of_rows'] == 1) {
@@ -171,7 +171,7 @@ function addData(table, element, data, page) {
         new_payload = clone(window.payload);
         new_payload['filter'] = {};
         new_payload['filter'][value['field']] = true;
-        header += '<tr><td>'+value['field']+'</td><td><a href="/#!/data/?payload='+encodeURIComponent(JSON.stringify(new_payload))+'">'+value['value']+'</a></td><td>'+value['percentage']+'</td><td>'+value['sentence']+'</tr>';
+        header += '<tr><td>'+value['field']+'</td><td><a href="/#!/information/?payload='+encodeURIComponent(JSON.stringify(new_payload))+'">'+value['value']+'</a></td><td>'+value['percentage']+'</td><td>'+value['sentence']+'</tr>';
       });
       header += '</table>';
     }
@@ -243,7 +243,7 @@ function addData(table, element, data, page) {
     }
 }
 function addUrl(element, url) {
-  window.location.hash = '!/data/'+url.substring(45);
+  window.location.hash = '!/information/'+url.substring(45);
   //console.log('add url '+url);
   setTimeout(function() {element.find('.url').html('<a href="'+url+'">'+url+'</a>');}, 500);
 }
@@ -476,7 +476,7 @@ $(function() {
       //console.log(value+' '+JSON.stringify(data[value]));
       $.each(data['data'][value], function(j, value2) {
         table += '<tr>';
-        table += '<td><a href="/#!/data/?table='+value2[theObj.attr('data-field_for_url')]+'">'+value2[theObj.attr('data-field_to_name_link')]+'</a>';
+        table += '<td><a href="/#!/information/?table='+value2[theObj.attr('data-field_for_url')]+'">'+value2[theObj.attr('data-field_to_name_link')]+'</a>';
         $.each(data['table_fields'], function(h, value3) {
           table += cell(value2, value3);
         });
