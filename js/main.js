@@ -90,7 +90,7 @@ function addinformation(table, element, information, page) {
   document.title = title + " | Inside Your Government";
   header = '<section class="content"><a href="#!/information/?table='+information['table']['id']+'">Link to table without any subqueries</a> ';
   header += 'Raw information in JSON format at <span class="url"></span>';
-  header += '<br/><strong>Search:</strong> <input type="text" class="search_query" /><input type="button" information-table="'+information['table']['id']+'" class="go" value="go" />';
+  header += '<br/><strong>Search:</strong> <input type="text" class="search_query" /><input type="button" data-table="'+information['table']['id']+'" class="go" value="go" />';
   if (information['number_of_rows'] == 1) {
     header += ' ('+information['number_of_rows']+' row)';
   } else {
@@ -120,9 +120,9 @@ function addinformation(table, element, information, page) {
           isboth = ' selected';
         }
 
-        header += ' <select information-field="'+value['name']+'" class="boolean_field"><option value="both"'+isboth+'>Both '+value['display_name']+' and Not '+value['display_name']+'</option><option value="true"'+istrue+'>Only '+value['display_name']+'</option><option value="false"'+isfalse+'>Only Not '+value['display_name']+'</option></select>';
+        header += ' <select data-field="'+value['name']+'" class="boolean_field"><option value="both"'+isboth+'>Both '+value['display_name']+' and Not '+value['display_name']+'</option><option value="true"'+istrue+'>Only '+value['display_name']+'</option><option value="false"'+isfalse+'>Only Not '+value['display_name']+'</option></select>';
     } else if (value['selector'] == 'dropdown') {
-        header += ' <strong>'+value['display_name']+'</strong> <select information-field="'+value['name']+'" class="dropdown_selector">';
+        header += ' <strong>'+value['display_name']+'</strong> <select data-field="'+value['name']+'" class="dropdown_selector">';
         
         selected = 'none';
         if ('filter' in window.payload) {
@@ -320,8 +320,8 @@ String.prototype.endsWith = function(suffix) {
 };
 function processHash() {
   setTimeout(function() {
-    $('#share_buttons #facebook').html("<div class=\"fb-share-button\" information-href=\""+window.location+" information-layout=\"button\"><\/div>");
-    $('#share_buttons #twitter').html("<a href=\"https:\/\/twitter.com\/share\" class=\"twitter-share-button\"{count} information-size=\"large\">Tweet<\/a>\r\n<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=\/^http:\/.test(d.location)?\'http\':\'https\';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+\':\/\/platform.twitter.com\/widgets.js\';fjs.parentNode.insertBefore(js,fjs);}}(document, \'script\', \'twitter-wjs\');<\/script>");
+    $('#share_buttons #facebook').html("<div class=\"fb-share-button\" data-href=\""+window.location+" data-layout=\"button\"><\/div>");
+    $('#share_buttons #twitter').html("<a href=\"https:\/\/twitter.com\/share\" class=\"twitter-share-button\"{count} data-size=\"large\">Tweet<\/a>\r\n<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=\/^http:\/.test(d.location)?\'http\':\'https\';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+\':\/\/platform.twitter.com\/widgets.js\';fjs.parentNode.insertBefore(js,fjs);}}(document, \'script\', \'twitter-wjs\');<\/script>");
   }, 1000);
   var hash = window.location.hash;
   if (hash) {
@@ -452,8 +452,8 @@ $(function() {
     var attributes = {}; 
     if( this.length ) {
         $.each( this[0].attributes, function( index, attr ) {
-            if (attr.name.substring(0,5) == 'information-') {
-              if (attr.name == 'information-pluck') {
+            if (attr.name.substring(0,5) == 'data-') {
+              if (attr.name == 'data-pluck') {
                 attributes[ attr.name.slice(5) ] = JSON.parse(attr.value);
               } else {
                 attributes[ attr.name.slice(5) ] = attr.value;
@@ -476,7 +476,7 @@ $(function() {
       //console.log(value+' '+JSON.stringify(information[value]));
       $.each(information['information'][value], function(j, value2) {
         table += '<tr>';
-        table += '<td><a href="/#!/information/?table='+value2[theObj.attr('information-field_for_url')]+'">'+value2[theObj.attr('information-field_to_name_link')]+'</a>';
+        table += '<td><a href="/#!/information/?table='+value2[theObj.attr('data-field_for_url')]+'">'+value2[theObj.attr('data-field_to_name_link')]+'</a>';
         $.each(information['table_fields'], function(h, value3) {
           table += cell(value2, value3);
         });
@@ -502,7 +502,7 @@ $(function() {
 
   $('body').on('click', '.go', function() {
     var query = $(this).prev().val();
-    getinformation($(this).attr('information-table'), $('#working_space'), {'has_string_in_any_field': query});
+    getinformation($(this).attr('data-table'), $('#working_space'), {'has_string_in_any_field': query});
     setTimeout(function() {$('.search_query').val(query)}, 1000);
     setTimeout(function() {highlight($('.search_query').val(), $('#working_space td').not('.photo'))}, 1000);
   });
@@ -512,13 +512,13 @@ $(function() {
     }
   });
   $('body').on('change', '.boolean_field', function(e) {
-    var f = $(this).attr('information-field');
+    var f = $(this).attr('data-field');
     window.payload['filter'] = {};
     //console.log(JSON.stringify(window.payload));
     if ($(this).val() == 'both') {
       if ('filter' in window.payload) {
-        if ($(this).attr('information-field') in window.payload['filter']) {
-          delete window.payload['filter'][$(this).attr('information-field')];
+        if ($(this).attr('data-field') in window.payload['filter']) {
+          delete window.payload['filter'][$(this).attr('data-field')];
         }
         if (Object.keys(window.payload['filter'])) {
           delete window.payload['filter'];
@@ -532,13 +532,13 @@ $(function() {
     
   });
   $('body').on('change', '.dropdown_selector', function(e) {
-    var f = $(this).attr('information-field');
+    var f = $(this).attr('data-field');
     window.payload['filter'] = {};
     //console.log(JSON.stringify(window.payload));
     if ($(this).val() == 'none') {
       if ('filter' in window.payload) {
-        if ($(this).attr('information-field') in window.payload['filter']) {
-          delete window.payload['filter'][$(this).attr('information-field')];
+        if ($(this).attr('data-field') in window.payload['filter']) {
+          delete window.payload['filter'][$(this).attr('data-field')];
         }
         //if (Object.keys(window.payload['filter'])) {
         //  delete window.payload['filter'];
