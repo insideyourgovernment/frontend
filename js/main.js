@@ -245,6 +245,30 @@ function addData(table, element, data, page) {
         }
     }
 }
+function addGetData(table, element, data, page) {
+  element.html('');
+  window.payload = data['payload'];
+  //console.log(window.payload);  
+  //console.log('fields '+data['fields']);
+  var additional = '';
+  if ('has_string_in_any_field' in window.payload) {
+    additional = ' mentioning "'+window.payload['has_string_in_any_field']+'"';
+    setTimeout(function() {highlight(window.payload['has_string_in_any_field'], $('.data_results td'))}, 1500);
+  }
+  var title = data['table']['name']+additional;
+  var header = '<section class="content-header"><h1>'+title+'</h1></section>';
+  element.append(header);
+  header = '';
+  document.title = title + " | Inside Your Government";
+  header = '<section class="content"><a href="#!/information/?table='+data['table']['id']+'">Link to table without any subqueries</a> ';
+  header += 'Raw data in JSON format at <span class="url"></span>';
+  header += '<table>';
+  $.each(Object.keys(data['data']), function(i, v) {
+      header += '<tr><th>'+v+'</th><td>'+cell(data['data'][v])+'</td></tr>';
+  });
+  header += '</table>';
+  element.html(header);
+}
 function addUrl(element, url) {
     console.log('url', url);
   window.location.hash = '!/information/'+url.substring(45);
@@ -268,7 +292,11 @@ function getData(table, element, other) {
       },
       success: function(data){
         window.data = data;
-        addData(table, element, window.data, 1);
+        if ('get' in data['payload']) {
+          addGetData(table, element, window.data, 1);  
+        } else {
+          addData(table, element, window.data, 1);
+        }
       }
   });
 }
