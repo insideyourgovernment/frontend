@@ -255,7 +255,7 @@ function addGetData(table, element, data, page) {
     additional = ' mentioning "'+window.payload['has_string_in_any_field']+'"';
     setTimeout(function() {highlight(window.payload['has_string_in_any_field'], $('.data_results td'))}, 1500);
   }
-  var title = data['table']['name']+additional;
+  var title = data['data']['id']+additional;
   var header = '<section class="content-header"><h1>'+title+'</h1></section>';
   element.append(header);
   header = '';
