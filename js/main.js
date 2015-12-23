@@ -260,7 +260,7 @@ function addGetData(table, element, data, page) {
   document.title = title + " | Inside Your Government";
   header += '<section class="content">';
     //header += '<a href="#!/information/?table='+data['table']['id']+'">Link to table without any subqueries</a> ';
-  header += 'Raw data in JSON format at <span class="url"></span>';
+  header += '<p>Raw data in JSON format at <span class="url"></span></p>';
   header += '<table class="data_table">';
   $.each(Object.keys(data['data']), function(i, v) {
       header += '<tr><th>'+v+'</th>'+cell(data['data'], v)+'</tr>';
