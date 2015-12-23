@@ -343,7 +343,7 @@ function getDataForPayload(payload, element) {
         success: function(data){
           window.data = data;
           var table = data['table'];
-          console.log('is get '+('get' in Object.keys(data['payload'])))
+          console.log('is get '+JSON.stringify(Object.keys(data['payload']))+'  '+('get' in Object.keys(data['payload'])))
         if ('get' in Object.keys(data['payload'])) {
           addGetData(table, element, window.data, 1);  
         } else {
