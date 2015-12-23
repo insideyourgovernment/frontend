@@ -257,15 +257,13 @@ function addGetData(table, element, data, page) {
   }
   var title = data['data']['id']+additional;
   var header = '<section class="content-header"><h1>'+title+'</h1></section>';
-  element.append(header);
-  header = '';
   document.title = title + " | Inside Your Government";
-  header = '<section class="content">';
+  header += '<section class="content">';
     //header += '<a href="#!/information/?table='+data['table']['id']+'">Link to table without any subqueries</a> ';
   header += 'Raw data in JSON format at <span class="url"></span>';
   header += '<table class="data_table">';
   $.each(Object.keys(data['data']), function(i, v) {
-      header += '<tr><th>'+v+'</th><td>'+cell(data['data'], v)+'</td></tr>';
+      header += '<tr><th>'+v+'</th>'+cell(data['data'], v)+'</tr>';
   });
   header += '</table>';
   element.html(header);
