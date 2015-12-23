@@ -48,7 +48,7 @@ if (!(value3 in value2)) {
           }
           if ('table' in window.payload) {
           var filter = {}
-          filter[value2] = value3;
+          filter[value3] = value2[value3];
               
           var newpayload = {'table': window.payload['table'], 'filter': filter}
           console.log(value2+' '+value3+' '+JSON.stringify(newpayload));
