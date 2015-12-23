@@ -43,8 +43,13 @@ if (!(value3 in value2)) {
           table_html += '<td>'+JSON.stringify(value2[value3]).replace(/:"/g, ': "').replace(/,/g, ', ')+'</td>';
         }
       } else if (value3 in value2) {
-        table_html += '<td>'+value2[value3]+'</td>';
+          var newpayload = {'table': window.payload['table'], 'filter': {value2: value3}}
+          
+        table_html += '<td><a href="/retrive/?payload='+newpayload+'">'+value2[value3]+'</a></td>';
       }
+        else {
+            table_html += '<td></td>';
+        }
         return table_html;
     }
     if(typeof console === "undefined"){
