@@ -292,7 +292,7 @@ function getData(table, element, other) {
       },
       success: function(data){
         window.data = data;
-        if ('get' in data['payload']) {
+        if ('get' in Object.keys(data['payload'])) {
           addGetData(table, element, window.data, 1);  
         } else {
           addData(table, element, window.data, 1);
