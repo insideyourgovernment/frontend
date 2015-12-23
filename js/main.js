@@ -291,8 +291,8 @@ function getData(table, element, other) {
       },
       success: function(data){
         window.data = data;
-        console.log('is get '+('get' in Object.keys(data['payload'])))
-        if ('get' in Object.keys(data['payload'])) {
+        console.log('is get '+(Object.keys(data['payload']).indexOf('get') > -1))
+        if (Object.keys(data['payload']).indexOf('get') > -1) {
           addGetData(table, element, window.data, 1);  
         } else {
           addData(table, element, window.data, 1);
@@ -315,8 +315,8 @@ function getDataForPayload(payload, element) {
         success: function(data){
           var table = data['table'];
           window.data = data;
-          console.log('is get '+('get' in Object.keys(data['payload'])))
-        if ('get' in Object.keys(data['payload'])) {
+          console.log('is get '+(Object.keys(data['payload']).indexOf('get') > -1))
+        if (Object.keys(data['payload']).indexOf('get') > -1) {
           addGetData(table, element, window.data, 1);  
         } else {
           addData(table, element, window.data, 1);
@@ -342,8 +342,8 @@ function getDataForPayload(payload, element) {
         success: function(data){
           window.data = data;
           var table = data['table'];
-          console.log('is get '+JSON.stringify(Object.keys(data['payload']))+'  '+('get' in Object.keys(data['payload'])))
-        if (Object.keys(data['payload']).indexOf('get')) {
+          console.log('is get '+JSON.stringify(Object.keys(data['payload']))+'  '+(Object.keys(data['payload']).indexOf('get') > -1))
+        if (Object.keys(data['payload']).indexOf('get') > -1) {
           addGetData(table, element, window.data, 1);  
         } else {
           addData(table, element, window.data, 1);
