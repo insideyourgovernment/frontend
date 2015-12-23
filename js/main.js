@@ -44,8 +44,8 @@ if (!(value3 in value2)) {
         }
       } else if (value3 in value2) {
           var newpayload = {'table': window.payload['table'], 'filter': {value2: value3}}
-          
-        table_html += '<td><a href="/retrive/?payload='+newpayload+'">'+value2[value3]+'</a></td>';
+          newpayload = encodeURIComponent(JSON.stringify(newpayload))
+        table_html += '<td><a href="#!/information/?payload='+newpayload+'">'+value2[value3]+'</a></td>';
       }
         else {
             table_html += '<td></td>';
