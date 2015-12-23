@@ -255,7 +255,7 @@ function addGetData(table, element, data, page) {
     additional = ' mentioning "'+window.payload['has_string_in_any_field']+'"';
     setTimeout(function() {highlight(window.payload['has_string_in_any_field'], $('.data_results td'))}, 1500);
   }
-  var title = data['data']['id']+additional;
+  var title = data['title'];
   var header = '<section class="content-header"><h1>'+title+'</h1></section>';
   document.title = title + " | Inside Your Government";
   header += '<section class="content">';
