@@ -316,7 +316,12 @@ function getDataForPayload(payload, element) {
         success: function(data){
           var table = data['table'];
           window.data = data;
-          addData(table, element, data, 1);
+          console.log('is get '+('get' in Object.keys(data['payload'])))
+        if ('get' in Object.keys(data['payload'])) {
+          addGetData(table, element, window.data, 1);  
+        } else {
+          addData(table, element, window.data, 1);
+        }
           if ('payload' in data) {
             if ('has_string_in_any_field' in data['payload']) {
               setTimeout(function() {$('.search_query').val(data['payload']['has_string_in_any_field'])}, 1000);
