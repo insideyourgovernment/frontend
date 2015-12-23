@@ -455,9 +455,8 @@ function gaTrack(path, title) {
 
 $(function() {
   function locationHashChanged() {
-    if (location.hash === "#somecoolfeature") {
-        processHash();
-    }
+    processHash();
+    
 }
 
 window.onhashchange = locationHashChanged;  
