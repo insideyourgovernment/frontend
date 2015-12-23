@@ -263,7 +263,7 @@ function addGetData(table, element, data, page) {
   header = '<section class="content">';
     //header += '<a href="#!/information/?table='+data['table']['id']+'">Link to table without any subqueries</a> ';
   header += 'Raw data in JSON format at <span class="url"></span>';
-  header += '<table>';
+  header += '<table class="data-table">';
   $.each(Object.keys(data['data']), function(i, v) {
       header += '<tr><th>'+v+'</th><td>'+cell(data['data'], v)+'</td></tr>';
   });
