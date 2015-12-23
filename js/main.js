@@ -265,7 +265,7 @@ function addGetData(table, element, data, page) {
   header += 'Raw data in JSON format at <span class="url"></span>';
   header += '<table>';
   $.each(Object.keys(data['data']), function(i, v) {
-      header += '<tr><th>'+v+'</th><td>'+cell(data['data'][v])+'</td></tr>';
+      header += '<tr><th>'+v+'</th><td>'+cell(data['data'], v)+'</td></tr>';
   });
   header += '</table>';
   element.html(header);
