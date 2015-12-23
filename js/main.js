@@ -198,7 +198,7 @@ function addData(table, element, data, page) {
       var rows = data['data'].slice((page-1) * per_page);
   }
   $.each(rows, function(j, value2) {
-    table_html += '<tr>';
+    table_html += '<tr><th></th>';
     
     if ('default_fields_to_display' in data['table']) {
       var fields = data['table']['default_fields_to_display'];
@@ -210,6 +210,9 @@ function addData(table, element, data, page) {
     });
     table_html += '</tr>';
     table_html += '<tr>';
+      var dict = {'table': data['table']['id'], 'get': value2['id']}
+      dict = encodeURIComponent(JSON.stringify(dict));
+      table_html += '<td><a href="/#!/information/?payload='+dict+'">Go to</a></td>';
     $.each(fields, function(h, value3) {
       table_html += cell(value2, value3); 
     });
