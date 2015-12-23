@@ -43,6 +43,9 @@ if (!(value3 in value2)) {
           table_html += '<td>'+JSON.stringify(value2[value3]).replace(/:"/g, ': "').replace(/,/g, ', ')+'</td>';
         }
       } else if (value3 in value2) {
+          if (!window.payload) {
+              window.payload = {};   
+          }
           if ('table' in window.payload) {
           var filter = {}
           filter[value2] = value3;
