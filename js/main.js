@@ -454,6 +454,13 @@ function gaTrack(path, title) {
 
 
 $(function() {
+  function locationHashChanged() {
+    if (location.hash === "#somecoolfeature") {
+        processHash();
+    }
+}
+
+window.onhashchange = locationHashChanged;  
   $('#nav').height($('#nav a:link').outerHeight()+2);
   gaTracker('UA-70789642-1');
   $('#account_box').hide();
