@@ -43,11 +43,15 @@ if (!(value3 in value2)) {
           table_html += '<td>'+JSON.stringify(value2[value3]).replace(/:"/g, ': "').replace(/,/g, ', ')+'</td>';
         }
       } else if (value3 in value2) {
+          if ('table' in window.payload) {
           var filter = {}
           filter[value2] = value3;
           var newpayload = {'table': window.payload['table'], 'filter': filter}
           newpayload = encodeURIComponent(JSON.stringify(newpayload))
         table_html += '<td><a href="#!/information/?payload='+newpayload+'">'+value2[value3]+'</a></td>';
+          } else {
+              table_html += '<td>'+value2[value3]+'</td>';
+          }
       }
         else {
             table_html += '<td></td>';
