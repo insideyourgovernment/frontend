@@ -292,6 +292,7 @@ function getData(table, element, other) {
       },
       success: function(data){
         window.data = data;
+        console.log('is get '+('get' in Object.keys(data['payload'])))
         if ('get' in Object.keys(data['payload'])) {
           addGetData(table, element, window.data, 1);  
         } else {
