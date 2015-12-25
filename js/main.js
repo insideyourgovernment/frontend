@@ -110,7 +110,7 @@ function addData(table, element, data, page) {
   if (data['number_of_rows'] == 1) {
     header += ' ('+data['number_of_rows']+' row)';
   } else {
-    header += ' ('+data['number_of_rows']+' '+data['name_for_rows']+')';
+    header += ' ('+numberWithCommas(data['number_of_rows'])+' '+data['name_for_rows']+')';
   }
   $.each(data['field_selectors'], function(i, value) {
     if (value['selector'] == 'checkbox') {
