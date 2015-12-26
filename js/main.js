@@ -497,8 +497,13 @@ $(function() {
                 html += '<i class="'+v['icon']+'"></i> <span>'+v['text']+'</span> <i class="fa fa-angle-left pull-right"></i>';
               html += '</a>';
               html += '<ul class="treeview-menu">';
-                html += '<li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>';
-                html += '<li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>';
+              $.each(data['children'], function(i2, v2) {
+                  html += '<li class="treeview">';
+                  html += '<a href="'+v2['href']+'">';
+                    html += '<i class="'+v2['icon']+'"></i> <span>'+v2['text']+'</span>';
+                  html += '</a>';
+                html += '</li>';
+              });
               html += '</ul>';
             html += '</li>';
               });
