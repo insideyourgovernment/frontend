@@ -469,7 +469,7 @@ function gaTrack(path, title) {
 
 
 $(function() {
-   window.ws = null;
+   function createWS() { window.ws = null;
 
     if ("WebSocket" in window) { 
         window.ws = new WebSocket("wss://ws.insideyourgovernment.com/ws/");
@@ -483,6 +483,7 @@ $(function() {
         }
         window.ws.onclose = function() {
             console.log("Connection is closed");
+            createWS();
         }
         window.ws.onmessage = function(msg) {
           var data = JSON.parse(msg.data);
@@ -517,6 +518,8 @@ $(function() {
     } else {
         $('h1').html('Your web broswer is too old for this site. Please use a modern web browser that supports web sockets such as <a href="https://www.google.com/intl/en/chrome/">Google Chrome</a>.');
     }
+}
+    createWS();
     function locationHashChanged() {
         processHash();
     }
