@@ -470,10 +470,32 @@ function gaTrack(path, title) {
 
 
 $(function() {
-  function locationHashChanged() {
-    processHash();
-    
-}
+    var ws = null;
+
+    if ("WebSocket" in window) { 
+        ws = new WebSocket("ws://ws.insideyourgovernment.com/ws/");
+        ws.onopen = function() { 
+            
+            console.log("Connection is opened");
+            ws.send({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_name'})
+            ws.send({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_acronym'})
+            ws.send({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_tagline'})
+        }
+        ws.onclose = function() {
+            console.log("Connection is closed");
+        }
+        ws.onmessage = function(msg) {
+          var data = JSON.parse(msg.data);
+          if (data['ws_for'] == 'change_data_for_id') {
+              $('#'+data['id']).text(data['value']);
+          }
+        }    
+    } else {
+        $('h1').html('Your web broswer is too old for this site. Please use a modern web browser that supports web sockets such as <a href="https://www.google.com/intl/en/chrome/">Google Chrome</a>.');
+    }
+    function locationHashChanged() {
+        processHash();
+    }
 
 window.onhashchange = locationHashChanged;  
   $('#nav').height($('#nav a:link').outerHeight()+2);
