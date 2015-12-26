@@ -477,9 +477,10 @@ $(function() {
         ws.onopen = function() { 
             
             console.log("Connection is opened");
-            ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_name'}))
-            ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_acronym'}))
-            ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_tag_line'}))
+            ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_name'}));
+            ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_acronym'}));
+            ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_tag_line'}));
+            ws.send(JSON.stringify({'ws_for': 'create_main_navigation', 'table': 'site_content', 'get': 'main_navigation'}));
         }
         ws.onclose = function() {
             console.log("Connection is closed");
@@ -487,7 +488,21 @@ $(function() {
         ws.onmessage = function(msg) {
           var data = JSON.parse(msg.data);
           if (data['ws_for'] == 'change_data_for_id') {
-              $('#'+data['id']).text(data['value']);
+            $('#'+data['id']).text(data['value']);
+          } else if (data['ws_for'] == 'create_main_navigation') {
+            var html = '';
+              $.each(data['links'], function(i, v) {
+              html += '<li class="treeview">';
+              html += '<a href="'+v['href']+'">';
+                html += '<i class="'+v['icon']+'"></i> <span>'+v['text']+'</span> <i class="fa fa-angle-left pull-right"></i>';
+              html += '</a>';
+              html += '<ul class="treeview-menu">';
+                html += '<li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>';
+                html += '<li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>';
+              html += '</ul>';
+            html += '</li>';
+              });
+            $('#main_navigation').html(html)
           }
         }    
     } else {
