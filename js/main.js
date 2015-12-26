@@ -474,7 +474,7 @@ $(function() {
     if ("WebSocket" in window) { 
         window.ws = new WebSocket("wss://ws.insideyourgovernment.com/ws/");
         window.ws.onopen = function() { 
-            
+            processHash();
             console.log("Connection is opened");
            window.ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_name'}));
             window.ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_acronym'}));
@@ -524,7 +524,7 @@ window.onhashchange = locationHashChanged;
   gaTracker('UA-70789642-1');
   $('#account_box').hide();
   $('.main').not('#home').hide();
-  processHash();
+  
   //$('ul'+hash+':first').show();
   $('body').on('click', 'a', function() {
     //console.log($(this).attr('href').substring(0, 1));
