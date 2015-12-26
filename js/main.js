@@ -479,7 +479,7 @@ $(function() {
             console.log("Connection is opened");
             ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_name'}))
             ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_acronym'}))
-            ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_tagline'}))
+            ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_tag_line'}))
         }
         ws.onclose = function() {
             console.log("Connection is closed");
