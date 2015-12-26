@@ -469,22 +469,22 @@ function gaTrack(path, title) {
 
 
 $(function() {
-    var ws = null;
+   window.ws = null;
 
     if ("WebSocket" in window) { 
-        ws = new WebSocket("wss://ws.insideyourgovernment.com/ws/");
-        ws.onopen = function() { 
+        window.ws = new WebSocket("wss://ws.insideyourgovernment.com/ws/");
+        window.ws.onopen = function() { 
             
             console.log("Connection is opened");
-            ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_name'}));
-            ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_acronym'}));
-            ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_tag_line'}));
-            ws.send(JSON.stringify({'ws_for': 'create_main_navigation', 'table': 'site_content', 'get': 'main_navigation'}));
+           window.ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_name'}));
+            window.ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_acronym'}));
+            window.ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_tag_line'}));
+            window.ws.send(JSON.stringify({'ws_for': 'create_main_navigation', 'table': 'site_content', 'get': 'main_navigation'}));
         }
-        ws.onclose = function() {
+        window.ws.onclose = function() {
             console.log("Connection is closed");
         }
-        ws.onmessage = function(msg) {
+        window.ws.onmessage = function(msg) {
           var data = JSON.parse(msg.data);
           if (data['ws_for'] == 'change_data_for_id') {
             $('#'+data['id']).text(data['value']);
