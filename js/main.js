@@ -429,16 +429,15 @@ function processHash() {
           }
         })}, 1000);
     } else {
-        
-        document.title = $('#'+hash+'_main h1').text() + ' | Inside Your Government';
-        gaTrack(window.location.hash.substring(2), document.title + ' | Inside Your Government');
-        $('#'+hash+'_main').show();
+        ws.send(JSON.stringify({'ws_for': 'page', 'table': 'site_content', 'get': hash}));
+        //document.title = $('#'+hash+'_main h1').text() + ' | Inside Your Government';
+        //gaTrack(window.location.hash.substring(2), document.title + ' | Inside Your Government');
+        //$('#'+hash+'_main').show();
         
     }    
     
   } else {
-    window.location.hash = '#!/home/';
-    processHash();
+     ws.send(JSON.stringify({'ws_for': 'page', 'table': 'site_content', 'get': 'home'}));
   }
 }
 
@@ -508,6 +507,9 @@ $(function() {
             html += '</li>';
               });
             $('#main_navigation').html(html)
+          } else if (data['ws_for'] == 'page') {
+            $('title').text(data['html_title']);
+              $('h1').text(data['html_h1']);
           }
         }    
     } else {
