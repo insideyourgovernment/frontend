@@ -391,7 +391,7 @@ function _init() {
     $(document).on("click", a + " li a", function(a) {
     var d = $(this);
     var e;
-    if (d.attr('href') == '#') {
+    
       e = d.next();
       if (e.is(".treeview-menu") && e.is(":visible")) e.slideUp(c, function() {
         e.removeClass("menu-open")
@@ -405,8 +405,8 @@ function _init() {
           e.addClass("menu-open"), f.find("li.active").removeClass("active"), h.addClass("active"), b.layout.fix()
         })
       }
-      e.is(".treeview-menu") && a.preventDefault()
-    }
+     // e.is(".treeview-menu") && a.preventDefault()
+    
     })
 }
   /* ControlSidebar
