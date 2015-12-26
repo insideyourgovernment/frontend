@@ -473,7 +473,7 @@ $(function() {
     var ws = null;
 
     if ("WebSocket" in window) { 
-        ws = new WebSocket("ws://ws.insideyourgovernment.com/ws/");
+        ws = new WebSocket("wss://ws.insideyourgovernment.com/ws/");
         ws.onopen = function() { 
             
             console.log("Connection is opened");
