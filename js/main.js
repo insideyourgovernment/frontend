@@ -524,7 +524,7 @@ window.onhashchange = locationHashChanged;
   gaTracker('UA-70789642-1');
   $('#account_box').hide();
   $('.main').not('#home').hide();
-  processHash();
+  setTimeout(function() {processHash();},500);
   //$('ul'+hash+':first').show();
   $('body').on('click', 'a', function() {
     //console.log($(this).attr('href').substring(0, 1));
