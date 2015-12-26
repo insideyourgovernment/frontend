@@ -510,8 +510,10 @@ $(function() {
           } else if (data['ws_for'] == 'page') {
             $('title').text(data['html_title']);
               $('h1').text(data['html_h1']);
+              $('meta[name=description]').attr('content', data['html_meta_description']);
+              $('#main_content').text(data['content']);
           }
-        }    
+        }
     } else {
         $('h1').html('Your web broswer is too old for this site. Please use a modern web browser that supports web sockets such as <a href="https://www.google.com/intl/en/chrome/">Google Chrome</a>.');
     }
