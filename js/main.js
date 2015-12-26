@@ -478,6 +478,8 @@ $(function() {
             console.log("Connection is opened");
            window.ws.send(JSON.stringify({'ws_for': 'count', 'table': 'police_response_events'}));
             window.ws.send(JSON.stringify({'ws_for': 'count', 'table': 'records'}));
+            // records_audit_trails
+            window.ws.send(JSON.stringify({'ws_for': 'count', 'table': 'records_audit_trails'}));
            window.ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_name'}));
             window.ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_acronym'}));
             window.ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_tag_line'}));
