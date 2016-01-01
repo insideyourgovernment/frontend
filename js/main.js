@@ -471,57 +471,55 @@ function gaTrack(path, title) {
 $(function() {
    function createWS() { window.ws = null;
 
-    if ("WebSocket" in window) { 
-        window.ws = new WebSocket("wss://ws.insideyourgovernment.com/ws/");
-        window.ws.onopen = function() { 
-            processHash();
-            console.log("Connection is opened");
-           window.ws.send(JSON.stringify({'ws_for': 'count', 'table': 'police_response_events'}));
-            window.ws.send(JSON.stringify({'ws_for': 'count', 'table': 'records'}));
-            // records_audit_trails
-            window.ws.send(JSON.stringify({'ws_for': 'count', 'table': 'records_audit_trails'})); 
-           window.ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_name'}));
-            window.ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_acronym'}));
-            window.ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_tag_line'}));
-            window.ws.send(JSON.stringify({'ws_for': 'create_main_navigation', 'table': 'site_content', 'get': 'main_navigation'}));
-        }
-        window.ws.onclose = function() {
-            console.log("Connection is closed");
-            createWS();
-        }
-        window.ws.onmessage = function(msg) {
-          var data = JSON.parse(msg.data);
-          if (data['ws_for'] == 'change_data_for_id') {
-            $('#'+data['id']).text(data['value']);
-          } else if (data['ws_for'] == 'create_main_navigation') {
-            var html = '';
-              $.each(data['links'], function(i, v) {
-              html += '<li class="treeview">';
-              html += '<a href="'+v['href']+'">';
-                html += '<i class="'+v['icon']+'"></i> <span>'+v['text']+'</span> <i class="fa fa-angle-left pull-right"></i>';
-              html += '</a>';
-              html += '<ul class="treeview-menu">';
-              $.each(v['children'], function(i2, v2) {
-                  html += '<li class="treeview">';
-                  html += '<a href="'+v2['href']+'">';
-                    html += '<i class="'+v2['icon']+'"></i> <span>'+v2['text']+'</span>';
-                  html += '</a>';
-                html += '</li>';
-              });
-              html += '</ul>';
-            html += '</li>';
-              });
-            $('#main_navigation').html(html)
-          } else if (data['ws_for'] == 'page') {
-            $('title').text(data['html_title']);
-              $('h1').text(data['html_h1']);
-              $('meta[name=description]').attr('content', data['html_meta_description']);
-              $('#main_content').text(data['content']);
-          }
-        }
-    } else {
-        $('h1').html('Your web broswer is too old for this site. Please use a modern web browser that supports web sockets such as <a href="https://www.google.com/intl/en/chrome/">Google Chrome</a>.');
+    //window.ws = new WebSocket("wss://ws.insideyourgovernment.com/ws/");
+    window.ws = $.gracefulWebSocket("wss://ws.insideyourgovernment.com/ws/");
+    window.ws.onopen = function() { 
+        processHash();
+        console.log("Connection is opened");
+       window.ws.send(JSON.stringify({'ws_for': 'count', 'table': 'police_response_events'}));
+        window.ws.send(JSON.stringify({'ws_for': 'count', 'table': 'records'}));
+        // records_audit_trails
+        window.ws.send(JSON.stringify({'ws_for': 'count', 'table': 'records_audit_trails'})); 
+       window.ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_name'}));
+        window.ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_acronym'}));
+        window.ws.send(JSON.stringify({'ws_for': 'change_data_for_id', 'table': 'site_content', 'get': 'site_tag_line'}));
+        window.ws.send(JSON.stringify({'ws_for': 'create_main_navigation', 'table': 'site_content', 'get': 'main_navigation'}));
     }
+    window.ws.onclose = function() {
+        console.log("Connection is closed");
+        createWS();
+    }
+    window.ws.onmessage = function(msg) {
+      var data = JSON.parse(msg.data);
+      if (data['ws_for'] == 'change_data_for_id') {
+        $('#'+data['id']).text(data['value']);
+      } else if (data['ws_for'] == 'create_main_navigation') {
+        var html = '';
+          $.each(data['links'], function(i, v) {
+          html += '<li class="treeview">';
+          html += '<a href="'+v['href']+'">';
+            html += '<i class="'+v['icon']+'"></i> <span>'+v['text']+'</span> <i class="fa fa-angle-left pull-right"></i>';
+          html += '</a>';
+          html += '<ul class="treeview-menu">';
+          $.each(v['children'], function(i2, v2) {
+              html += '<li class="treeview">';
+              html += '<a href="'+v2['href']+'">';
+                html += '<i class="'+v2['icon']+'"></i> <span>'+v2['text']+'</span>';
+              html += '</a>';
+            html += '</li>';
+          });
+          html += '</ul>';
+        html += '</li>';
+          });
+        $('#main_navigation').html(html)
+      } else if (data['ws_for'] == 'page') {
+        $('title').text(data['html_title']);
+          $('h1').text(data['html_h1']);
+          $('meta[name=description]').attr('content', data['html_meta_description']);
+          $('#main_content').text(data['content']);
+      }
+    }
+
 }
     createWS();
     function locationHashChanged() {
@@ -543,19 +541,19 @@ window.onhashchange = locationHashChanged;
   });
   //console.log(document.cookie);
   //console.log(getCookie('session'));
-  $.get('https://api.insideyourgovernment.com/get_session_info/', {'session': getCookie('session')}, function(data) {
-      //console.log(data);
-      $('#login_box').hide();
-      $('#account_box').show(); 
-      if (data['is_admin']) {
-        $('.admin').show();
-        $.get('https://api.insideyourgovernment.com/tables/', function(data) {
-           $.each(data, function(i, value) {
-             $('#tables_for_action').append('<option value="'+value+'">'+value+'</option>');
-           });           
-        });
-      }
-    }); 
+  //$.get('https://api.insideyourgovernment.com/get_session_info/', {'session': getCookie('session')}, function(data) {
+  //    //console.log(data);
+  //    $('#login_box').hide();
+  //    $('#account_box').show(); 
+  //    if (data['is_admin']) {
+  //      $('.admin').show();
+  //      $.get('https://api.insideyourgovernment.com/tables/', function(data) {
+  //         $.each(data, function(i, value) {
+  //           $('#tables_for_action').append('<option value="'+value+'">'+value+'</option>');
+  //         });           
+  //      });
+  //    }
+  //  }); 
   $('#login').click(function() {
     $.post('https://api.insideyourgovernment.com/login/', {'email': $('#email').val(), 'password': $('#password').val()}, function(data) {
         //console.log(typeof data);
