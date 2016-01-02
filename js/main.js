@@ -472,7 +472,9 @@ $(function() {
    function createWS() { window.ws = null;
 
     //window.ws = new WebSocket("wss://ws.insideyourgovernment.com/ws/");
-    window.ws = new SockJS("https://ws.insideyourgovernment.com/ws");
+    var protocols = ['websocket', 'jsonp-polling'];
+    var options = {protocols_whitelist: protocols, debug: true, jsessionid: false};
+    window.ws = new SockJS("https://ws.insideyourgovernment.com/ws", null, options);
     window.ws.onopen = function() { 
         processHash();
         console.log("Connection is opened");
