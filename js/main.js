@@ -490,7 +490,8 @@ $(function() {
         createWS();
     }
     window.ws.onmessage = function(msg) {
-      var data = JSON.parse(msg.data);
+        var data = msg.data;
+      //var data = JSON.parse(msg.data);
       if (data['ws_for'] == 'change_data_for_id') {
         $('#'+data['id']).text(data['value']);
       } else if (data['ws_for'] == 'create_main_navigation') {
