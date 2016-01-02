@@ -472,7 +472,7 @@ $(function() {
    function createWS() { window.ws = null;
 
     //window.ws = new WebSocket("wss://ws.insideyourgovernment.com/ws/");
-    window.ws = $.gracefulWebSocket("wss://ws.insideyourgovernment.com/ws/");
+    window.ws = new SockJS("wss://ws.insideyourgovernment.com/ws");
     window.ws.onopen = function() { 
         processHash();
         console.log("Connection is opened");
